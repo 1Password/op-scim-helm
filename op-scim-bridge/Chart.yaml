@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 name: op-scim
 version: 1.4.3
 description: The 1Password SCIM bridge
@@ -14,3 +14,4 @@ maintainers: # (optional)
     email: support+business@1password.com
 icon: https://1password.com/img/logo-v1.svg
 appVersion: v1.4.3
+

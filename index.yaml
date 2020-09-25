@@ -2,8 +2,28 @@ apiVersion: v1
 entries:
   op-scim:
   - apiVersion: v2
+    appVersion: v1.6.0
+    created: "2020-09-24T17:44:28.061054-07:00"
+    description: The 1Password SCIM bridge
+    digest: e16b559646084894a837ba84dddadace1671bf5ebedcb76d11454c725fc023fd
+    home: https://support.1password.com/scim
+    icon: https://1password.com/img/logo-v1.svg
+    keywords:
+    - azure active directory
+    - okta
+    - provisioning
+    - SCIM
+    - 1Password
+    maintainers:
+    - email: support+business@1password.com
+      name: 1Password Platform Integrations Team
+    name: op-scim
+    urls:
+    - op-scim-1.6.0.tgz
+    version: 1.6.0
+  - apiVersion: v2
     appVersion: v1.5.0
-    created: "2020-09-02T17:15:28.834386-07:00"
+    created: "2020-09-24T17:44:28.059986-07:00"
     description: The 1Password SCIM bridge
     digest: 3f8fb2bcfb655bcaa77376a6a31791dc23e74bce259c051d226448dd72ca43cc
     home: https://support.1password.com/scim
@@ -23,7 +43,7 @@ entries:
     version: 1.5.0
   - apiVersion: v2
     appVersion: v1.4.4
-    created: "2020-09-02T17:15:28.833955-07:00"
+    created: "2020-09-24T17:44:28.059671-07:00"
     description: The 1Password SCIM bridge
     digest: 121e462663cf8f502f393ec16cd72af96444c7472d226156166b719fdf0d963f
     home: https://support.1password.com/scim
@@ -43,7 +63,7 @@ entries:
     version: 1.4.4
   - apiVersion: v2
     appVersion: v1.4.3
-    created: "2020-09-02T17:15:28.83306-07:00"
+    created: "2020-09-24T17:44:28.059007-07:00"
     description: The 1Password SCIM bridge
     digest: 90c47a74ec4c95ab4bb76d3e97d7687ecd0a13b37b277f5b2ecb417d9d51c198
     home: https://support.1password.com/scim
@@ -61,4 +81,4 @@ entries:
     urls:
     - op-scim-1.4.3.tgz
     version: 1.4.3
-generated: "2020-09-02T17:15:28.832454-07:00"
+generated: "2020-09-24T17:44:28.058343-07:00"

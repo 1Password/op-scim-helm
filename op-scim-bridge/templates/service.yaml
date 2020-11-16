@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "op-scim-bridge.fullname" . }}
+  labels:
+    app.kubernetes.io/component: op-scim-bridge
+    {{- include "op-scim-bridge.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 443
+      targetPort: http-app
+      protocol: TCP
+      name: https
+    - port: 80
+      targetPort: http-app
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/component: op-scim-bridge
+    {{- include "op-scim-bridge.selectorLabels" . | nindent 4 }}

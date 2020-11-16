@@ -6,9 +6,7 @@ metadata:
     app.kubernetes.io/component: op-scim-bridge
     {{- include "op-scim-bridge.labels" . | nindent 4 }}
 spec:
-{{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-{{- end }}
   selector:
     matchLabels:
       {{- include "op-scim-bridge.selectorLabels" . | nindent 6 }}
@@ -56,14 +54,6 @@ spec:
             - name: http-app
               containerPort: 8080
               protocol: TCP
-          #livenessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: http
-          #readinessProbe:
-          #  httpGet:
-          #    path: /
-          #    port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

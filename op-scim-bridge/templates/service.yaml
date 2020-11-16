@@ -9,7 +9,7 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: 443
-      targetPort: https-app
+      targetPort: http-app
       protocol: TCP
       name: https
     - port: 80

@@ -23,6 +23,27 @@ The 1Password SCIM bridge
 |------------|------|---------|
 | https://charts.bitnami.com/bitnami | redis | 12.0.0 |
 
+## Install
+
+Add Helm repository:
+
+```shell
+helm repo add 1password https://raw.githubusercontent.com/1password/op-scim-helm/main
+helm repo update
+```
+
+Install SCIM Helm chart:
+
+```shell
+helm install my-release 1password/op-scim-bridge
+```
+
+## Uninstall
+
+```shel
+helm remove my-release
+```
+
 ## Values
 
 | Key | Type | Default | Description |

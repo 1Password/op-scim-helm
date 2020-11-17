@@ -1,7 +1,104 @@
-applicationName: op-scim-bridge
-scimsessionFile: scimsession
-opscimImage: 1password/scim:v1.6.0
-redisImage: redis:latest
-scimUserID: 999
-scimUserName: scimuser
-scimUserHome: /home/scimuser
+scim:
+  # -- Default user ID for SCIM application
+  userID: 999
+  # -- User name for SCIM application
+  userName: scimuser
+  # -- User home directoy for SCIM application
+  userHome: /home/scimuser
+  # -- Session file for SCIM application
+  sessionFile: scimsession
+
+  # -- Replica count for SCIM deployment
+replicaCount: 1
+
+image:
+  # -- SCIM image repository
+  repository: 1password/scim
+  # -- SCIM image pull policy
+  pullPolicy: IfNotPresent
+  # -- SCIM image tag, overrides the image tag whose default is the chart appVersion.
+  tag: "v1.6.0"
+
+# -- Credentials secrets to use to pull the image
+imagePullSecrets: []
+# -- Name to override resources names
+nameOverride: ""
+# -- Override the full name, see helpers for more information
+fullnameOverride: ""
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use. If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Additionnal annotations on SCIM pods
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Service type, depends if you use an ingress controller or not
+  type: LoadBalancer
+
+ingress:
+  # -- Enable or not Ingress
+  enabled: false
+  # -- Additionnal annotations for the Ingress
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # kubernetes.io/tls-acme: "true"
+  # -- Hosts configuration for the ingress
+  hosts:
+    - host: scim.example.com
+      paths: ["/"]
+  # -- TLS configuration for the ingress
+  tls:
+    - secretName: scim-example-com-tls
+      hosts:
+        - scim.example.com
+
+# -- Resources requests/limits for the SCIM pods
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- Node selector for SCIM pods
+nodeSelector: {}
+
+# -- Pod toleration for SCIM pods
+tolerations: []
+
+# -- Pod affinity for SCIM pods
+affinity: {}
+
+# -- Storage class for the SCIM PVC
+storageClassName: do-block-storage
+
+# -- Redis configuration, check [the upstream configuration](https://github.com/bitnami/charts/blob/master/bitnami/redis)
+redis:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnami/redis
+    tag: 6.0.9-debian-10-r13
+    pullPolicy: IfNotPresent
+  cluster:
+    enabled: false
+  usePassword: false

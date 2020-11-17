@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "op-scim-bridge.fullname" . }}
+  labels:
+    app.kubernetes.io/component: op-scim-bridge
+    {{- include "op-scim-bridge.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "op-scim-bridge.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        app.kubernetes.io/component: op-scim-bridge
+        {{- include "op-scim-bridge.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "op-scim-bridge.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ .Chart.Name }}-scimuser-home-permissions
+          image: alpine:3.12
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            - "mkdir -p {{ .Values.scim.userHome }} && chown -R {{ .Values.scim.userID }} {{ .Values.scim.userHome }}"
+          volumeMounts:
+            - mountPath: "/home"
+              name: {{ .Chart.Name }}-scimsession
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - "/op-scim/op-scim"
+          args:
+            - "--redis-host={{ .Release.Name }}-redis-master"
+            - "--session={{ .Values.scim.userHome }}/{{ .Values.scim.sessionFile }}"
+            - "--port=8080"
+          ports:
+            - name: http-app
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: {{ .Chart.Name }}-scimsession
+              mountPath: "/home"
+              readOnly: false
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: {{ .Chart.Name }}-scimsession
+          persistentVolumeClaim:
+            claimName: {{ .Chart.Name }}-scimsession

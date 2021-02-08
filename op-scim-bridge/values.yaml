@@ -1,6 +1,6 @@
 applicationName: op-scim-bridge
 scimsessionFile: scimsession
-opscimImage: 1password/scim:v1.6.1
+opscimImage: 1password/scim:v1.6.2
 redisImage: redis:latest
 scimUserID: 999
 scimUserName: scimuser

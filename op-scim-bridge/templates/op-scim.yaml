@@ -28,7 +28,13 @@ spec:
         image: {{ .Values.opscimImage }}
         imagePullPolicy: Always
         command: ["/op-scim/op-scim"]
-        args: ["--redis-host={{ .Values.applicationName }}-redis-svc", "--session={{ .Values.scimUserHome }}/{{ .Values.scimsessionFile }}", "--port=8080"]
+        env:
+        - name: "OP_PORT"
+          value: "8080"
+        - name: "OP_SESSION"
+          value: "{{ .Values.scimUserHome }}/{{ .Values.scimsessionFile }}"
+        - name: "OP_REDIS_URL"
+          value: "redis://{{ .Values.applicationName }}-redis-svc:6379"
         ports:
         - containerPort: 8080
         - containerPort: 8443

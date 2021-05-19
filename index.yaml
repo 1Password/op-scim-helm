@@ -2,8 +2,28 @@ apiVersion: v1
 entries:
   op-scim:
   - apiVersion: v2
+    appVersion: v2.0.2
+    created: "2021-05-19T16:34:30.750478-04:00"
+    description: The 1Password SCIM bridge
+    digest: d4a3782e4648f9c2f90c668534c021dcb7060e95e4d9085fb81a2d680c28f0b8
+    home: https://support.1password.com/scim
+    icon: https://1password.com/img/logo-v1.svg
+    keywords:
+    - azure active directory
+    - okta
+    - provisioning
+    - SCIM
+    - 1Password
+    maintainers:
+    - email: support+business@1password.com
+      name: 1Password Platform Integrations Team
+    name: op-scim
+    urls:
+    - op-scim-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v2
     appVersion: v2.0.1
-    created: "2021-05-07T15:33:22.413061-04:00"
+    created: "2021-05-19T16:34:30.749824-04:00"
     description: The 1Password SCIM bridge
     digest: dacafc2de88204700abfbeed5f0a59ead89d3648c30925fc6fa483274fbfc184
     home: https://support.1password.com/scim
@@ -23,7 +43,7 @@ entries:
     version: 2.0.1
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2021-05-07T15:33:22.4128-04:00"
+    created: "2021-05-19T16:34:30.749053-04:00"
     description: The 1Password SCIM bridge
     digest: 70b9cb2f1d93f6138ab4798775175468fc6f80c4f54c49cedc967fddd3eb86e2
     home: https://support.1password.com/scim
@@ -43,7 +63,7 @@ entries:
     version: 2.0.0
   - apiVersion: v2
     appVersion: v1.6.2
-    created: "2021-05-07T15:33:22.412544-04:00"
+    created: "2021-05-19T16:34:30.747789-04:00"
     description: The 1Password SCIM bridge
     digest: 939fcf31f34e0257bd1694b59eaadd431bac87d28d32bfdf89977bc9d3961228
     home: https://support.1password.com/scim
@@ -63,7 +83,7 @@ entries:
     version: 1.6.2
   - apiVersion: v2
     appVersion: v1.6.1
-    created: "2021-05-07T15:33:22.412292-04:00"
+    created: "2021-05-19T16:34:30.7474-04:00"
     description: The 1Password SCIM bridge
     digest: f5c6a69ecffd8b23d99278b75a38b9b7474b0e0eddc1143a87f38fa646827a73
     home: https://support.1password.com/scim
@@ -83,7 +103,7 @@ entries:
     version: 1.6.1
   - apiVersion: v2
     appVersion: v1.6.0
-    created: "2021-05-07T15:33:22.412055-04:00"
+    created: "2021-05-19T16:34:30.746963-04:00"
     description: The 1Password SCIM bridge
     digest: e16b559646084894a837ba84dddadace1671bf5ebedcb76d11454c725fc023fd
     home: https://support.1password.com/scim
@@ -103,7 +123,7 @@ entries:
     version: 1.6.0
   - apiVersion: v2
     appVersion: v1.5.0
-    created: "2021-05-07T15:33:22.41182-04:00"
+    created: "2021-05-19T16:34:30.746391-04:00"
     description: The 1Password SCIM bridge
     digest: 3f8fb2bcfb655bcaa77376a6a31791dc23e74bce259c051d226448dd72ca43cc
     home: https://support.1password.com/scim
@@ -123,7 +143,7 @@ entries:
     version: 1.5.0
   - apiVersion: v2
     appVersion: v1.4.4
-    created: "2021-05-07T15:33:22.411566-04:00"
+    created: "2021-05-19T16:34:30.745777-04:00"
     description: The 1Password SCIM bridge
     digest: 121e462663cf8f502f393ec16cd72af96444c7472d226156166b719fdf0d963f
     home: https://support.1password.com/scim
@@ -143,7 +163,7 @@ entries:
     version: 1.4.4
   - apiVersion: v2
     appVersion: v1.4.3
-    created: "2021-05-07T15:33:22.411305-04:00"
+    created: "2021-05-19T16:34:30.744941-04:00"
     description: The 1Password SCIM bridge
     digest: 90c47a74ec4c95ab4bb76d3e97d7687ecd0a13b37b277f5b2ecb417d9d51c198
     home: https://support.1password.com/scim
@@ -161,4 +181,4 @@ entries:
     urls:
     - op-scim-1.4.3.tgz
     version: 1.4.3
-generated: "2021-05-07T15:33:22.410821-04:00"
+generated: "2021-05-19T16:34:30.741049-04:00"

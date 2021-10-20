@@ -1,6 +1,6 @@
 apiVersion: v2
 name: op-scim
-version: 2.2.0
+version: 2.2.1
 description: The 1Password SCIM bridge
 keywords:
   - "azure active directory"
@@ -13,4 +13,4 @@ maintainers: # (optional)
   - name: 1Password Platform Integrations Team
     email: support+business@1password.com
 icon: https://1password.com/img/logo-v1.svg
-appVersion: v2.2.0
+appVersion: v2.2.1

@@ -35,6 +35,8 @@ spec:
           value: "{{ .Values.scimUserHome }}/{{ .Values.scimsessionFile }}"
         - name: "OP_REDIS_URL"
           value: "redis://{{ .Values.applicationName }}-redis-svc:6379"
+        - name: "OP_PING_SERVER"
+          value: "1"
         ports:
         - containerPort: 8080
         - containerPort: 8443

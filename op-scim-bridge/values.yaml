@@ -1,7 +1,17 @@
 applicationName: op-scim-bridge
 scimsessionFile: scimsession
 opscimImage: 1password/scim:v2.3.0
-redisImage: redis:latest
 scimUserID: 999
 scimUserName: scimuser
 scimUserHome: /home/scimuser
+storageClass: do-block-storage
+redis:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnami/redis
+    tag: latest
+    pullPolicy: IfNotPresent
+  cluster:
+    enabled: false
+  usePassword: false

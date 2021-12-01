@@ -72,20 +72,3 @@ spec:
     app.kubernetes.io/application: {{ .Values.applicationName }}
     app.kubernetes.io/component: op-scim-bridge
   type: LoadBalancer
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ .Values.applicationName }}-pvc
-  labels:
-    app.kubernetes.io/application: {{ .Values.applicationName }}
-    app.kubernetes.io/component: op-scim-bridge
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: {{ .Values.storageClass }}

@@ -48,27 +48,3 @@ spec:
       - name: {{ .Values.applicationName }}-scimsession
         persistentVolumeClaim:
           claimName: {{ .Values.applicationName }}-pvc
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Values.applicationName }}-svc
-  labels:
-    app.kubernetes.io/application: {{ .Values.applicationName }}
-    app.kubernetes.io/component: op-scim-bridge
-spec:
-  ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: 8080
-  - name: scim-bridge-https-port
-    port: 443
-    protocol: TCP
-    targetPort: 8443
-  selector:
-    app.kubernetes.io/application: {{ .Values.applicationName }}
-    app.kubernetes.io/component: op-scim-bridge
-  type: LoadBalancer

@@ -1,10 +1,36 @@
-applicationName: op-scim-bridge
-scimsessionFile: scimsession
-opscimImage: 1password/scim:v2.3.0
-scimUserID: 999
-scimUserName: scimuser
-scimUserHome: /home/scimuser
-storageClass: do-block-storage
+scim:
+  name: "{{ .Chart.Name }}"
+  version: "{{ .Chart.AppVersion }}"
+  # credentialsSecret:
+  #   name: "{{ .Chart.Name }}-credentials"
+  #   key: scimsession
+  credentialsVolume:
+    name: "{{ .Chart.Name }}-credentials"
+    file: scimsession
+    type: emptyDir
+    values: {}
+  imageRepository: 1password/scim
+  httpPort: 8080
+  httpsPort: 8443
+  serviceType: LoadBalancer
+  redisURL: "redis://{{ .Chart.Name }}-redis-master:6379"
+  imagePullPolicy: Always
+  storageClass: do-block-storage
+  credential:
+    name:
+    key:
+    file:
+  probes:
+    liveness:
+      enabled: true
+      path: "/ping"
+  resources: {}
+  annotations: {}
+  labels: {}
+  podAnnotations: {}
+  podLabels: {}
+  nodeSelector: {}
+
 redis:
   enabled: true
   image:

@@ -1,11 +1,11 @@
 scim:
-  name: "{{ .Chart.Name }}"
+  name: "{{ .Chart.Name }}-bridge"
   version: "{{ .Chart.AppVersion }}"
   # credentialsSecret:
-  #   name: "{{ .Chart.Name }}-credentials"
+  #   name: "{{ .Chart.Name }}-bridge-credentials"
   #   key: scimsession
   credentialsVolume:
-    name: "{{ .Chart.Name }}-credentials"
+    name: "{{ .Chart.Name }}-bridge-credentials"
     file: scimsession
     type: emptyDir
     values: {}
@@ -13,7 +13,7 @@ scim:
   httpPort: 8080
   httpsPort: 8443
   serviceType: LoadBalancer
-  redisURL: "redis://{{ .Chart.Name }}-redis-master:6379"
+  redisURL: "redis://{{ .Chart.Name }}-bridge-redis-master:6379"
   imagePullPolicy: Always
   storageClass: do-block-storage
   credential:

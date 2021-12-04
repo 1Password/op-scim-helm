@@ -1,5 +1,5 @@
 apiVersion: v2
-name: op-scim-bridge
+name: op-scim
 version: 2.3.0
 description: A Helm chart for deploying the 1Password SCIM bridge
 keywords:

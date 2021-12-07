@@ -1,15 +1,15 @@
 scim:
   name: "{{ .Chart.Name }}-bridge"
   version: "{{ .Chart.AppVersion }}"
-  # credentialsSecret:
-  #   name: "{{ .Chart.Name }}-bridge-credentials"
-  #   key: scimsession
-  #   value: "base64 encoded scimsession file"
   credentialsVolume:
     name: "{{ .Chart.Name }}-bridge-credentials"
     file: scimsession
     type: emptyDir
     values: {}
+  # credentialsSecret:
+  #   name: "{{ .Chart.Name }}-bridge-credentials"
+  #   key: scimsession
+  #   value: "base64 encoded scimsession file"
   imageRepository: 1password/scim
   httpPort: 8080
   httpsPort: 8443
@@ -17,10 +17,6 @@ scim:
   redisURL: "redis://{{ .Chart.Name }}-bridge-redis-master:6379"
   imagePullPolicy: Always
   storageClass: do-block-storage
-  credential:
-    name:
-    key:
-    file:
   probes:
     liveness:
       enabled: true

@@ -37,16 +37,13 @@ spec:
       nodeSelector:
         {{ toYaml . | indent 8 }}
       {{ end }}
+      {{ if .Values.scim.credentialsVolume }}
       volumes:
-        - name: "{{ tpl .Values.scim.name . }}-credentials"
-        {{ if .Values.scim.credentialsVolume }}
+        - name: {{ tpl .Values.scim.credentialsVolume.name . }}
           persistentVolumeClaim:
             claimName: {{ tpl .Values.scim.name . }}-pvc
-        {{ end }}
-        {{ if .Values.scim.credentialsSecret }}
-          secret:
-            secretName: {{ tpl .Values.scim.credentialsSecret.name . }}
-        {{ end }}
+      {{ end }}
+      {{ if .Values.scim.credentialsVolume }}
       initContainers:
         - name: opuser-home-permissions
           image: alpine:3.12
@@ -58,6 +55,7 @@ spec:
           volumeMounts:
             - mountPath: /home/opuser/.op
               name: {{ tpl .Values.scim.name . }}-credentials
+      {{ end }}
       containers:
         - name: {{ tpl .Values.scim.name . }}
           image: {{ .Values.scim.imageRepository }}:{{ tpl .Values.scim.version . }}

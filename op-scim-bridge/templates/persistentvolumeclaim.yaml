@@ -3,6 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ tpl .Values.scim.name . }}-pvc
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/application: {{ tpl .Values.scim.name . }}
     {{ with .Values.scim.labels }}

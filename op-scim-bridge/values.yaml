@@ -4,6 +4,7 @@ scim:
   # credentialsSecret:
   #   name: "{{ .Chart.Name }}-bridge-credentials"
   #   key: scimsession
+  #   value: "base64 encoded scimsession file"
   credentialsVolume:
     name: "{{ .Chart.Name }}-bridge-credentials"
     file: scimsession

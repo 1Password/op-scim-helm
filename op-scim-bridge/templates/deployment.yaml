@@ -89,6 +89,14 @@ spec:
               value: "{{ tpl .Values.scim.redisURL . }}"
             - name: "OP_PING_SERVER"
               value: "{{ .Values.scim.probes.liveness.enabled }}"
+            {{ if .Values.scim.letsEncryptDomain }}
+            - name: "OP_LETSENCRYPT_DOMAIN"
+              value: {{ .Values.scim.letsEncryptDomain }}
+            {{ end }}
+            {{ if .Values.scim.oneClick }}
+            - name: "OP_ONE_CLICK"
+              value: {{ .Values.scim.oneClick }}
+            {{ end }}
           ports:
             - containerPort: {{ .Values.scim.httpPort }}
             - containerPort: {{ .Values.scim.httpsPort }}

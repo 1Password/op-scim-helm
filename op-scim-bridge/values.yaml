@@ -21,6 +21,8 @@ scim:
     liveness:
       enabled: true
       path: "/ping"
+  # letsEncryptDomain: scim.example.com
+  # oneClick: false
   resources: {}
   annotations: {}
   labels: {}

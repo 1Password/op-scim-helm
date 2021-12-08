@@ -6,7 +6,7 @@ scim:
     file: scimsession
     type: emptyDir
     values: {}
-    storageClass: do-block-storage # TODO: remove default?
+    # storageClass: do-block-storage
   # credentialsSecret:
   #   name: "{{ .Chart.Name }}-bridge-credentials"
   #   key: scimsession
@@ -18,13 +18,18 @@ scim:
   httpPort: 8080
   httpsPort: 8443
   serviceType: LoadBalancer
-  redisURL: "redis://{{ .Chart.Name }}-bridge-redis-master:6379"
   probes:
     liveness:
       enabled: true
       path: "/ping"
-  # letsEncryptDomain: scim.example.com
-  # oneClick: false # TODO: confirm if this is even a thing
+  config:
+    redisURL: "redis://{{ .Chart.Name }}-bridge-redis-master:6379"
+    # domain: example.1password.com
+    # letsEncryptDomain: scim.example.com
+    # debug: false
+    # jsonLogs: false
+    # prettyLogs: false
+    # oneClick: false # TODO: confirm if this is even a thing
   resources: {}
   annotations: {}
   labels: {}

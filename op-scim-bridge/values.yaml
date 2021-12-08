@@ -14,7 +14,7 @@ scim:
   # TODO: nest all image* keys
   imageRepository: 1password/scim
   imagePullPolicy: Always
-  imagePullSecrets: {}
+  imagePullSecrets: []
   httpPort: 8080
   httpsPort: 8443
   serviceType: LoadBalancer

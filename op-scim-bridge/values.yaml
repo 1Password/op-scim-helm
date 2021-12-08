@@ -6,29 +6,33 @@ scim:
     file: scimsession
     type: emptyDir
     values: {}
+    storageClass: do-block-storage # TODO: remove default?
   # credentialsSecret:
   #   name: "{{ .Chart.Name }}-bridge-credentials"
   #   key: scimsession
   #   value: "base64 encoded scimsession file"
+  # TODO: nest all image* keys
   imageRepository: 1password/scim
+  imagePullPolicy: Always
+  imagePullSecrets: {}
   httpPort: 8080
   httpsPort: 8443
   serviceType: LoadBalancer
   redisURL: "redis://{{ .Chart.Name }}-bridge-redis-master:6379"
-  imagePullPolicy: Always
-  storageClass: do-block-storage
   probes:
     liveness:
       enabled: true
       path: "/ping"
   # letsEncryptDomain: scim.example.com
-  # oneClick: false
+  # oneClick: false # TODO: confirm if this is even a thing
   resources: {}
   annotations: {}
   labels: {}
   podAnnotations: {}
   podLabels: {}
   nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
 redis:
   enabled: true

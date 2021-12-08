@@ -19,7 +19,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  {{ if .Values.scim.storageClass }}
-  storageClassName: {{ .Values.scim.storageClass }}
+  {{ if .Values.scim.credentialsVolume.storageClass }}
+  storageClassName: {{ .Values.scim.credentialsVolume.storageClass }}
   {{ end }}
 {{ end }}

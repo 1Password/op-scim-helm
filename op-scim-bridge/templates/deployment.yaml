@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/component: {{ tpl .Values.scim.name . }}
     {{ with .Values.scim.labels }}
-    {{ toYaml . | nindent 4 }}
+      {{ toYaml . | nindent 4 }}
     {{ end }}
   {{ with .Values.scim.annotations }}
   annotations:
@@ -26,16 +26,24 @@ spec:
         version: {{ tpl .Values.scim.version . }}
         app.kubernetes.io/component: {{ tpl .Values.scim.name . }}
         {{ with .Values.scim.podLabels }}
-        {{ toYaml . | nindent 8 }}
+          {{ toYaml . | nindent 8 }}
         {{ end }}
       {{ with .Values.scim.podAnnotations }}
       annotations:
         {{ toYaml . | nindent 8 }}
       {{ end }}
     spec:
-      {{ with .Values.scim.nodeSelector }}
+      {{ with .Values.nodeSelector }}
       nodeSelector:
-        {{ toYaml . | indent 8 }}
+        {{ toYaml . | nindent 8 }}
+      {{ end }}
+      {{ with .Values.affinity }}
+      affinity:
+        {{ toYaml . | nindent 8 }}
+      {{ end }}
+      {{ with .Values.tolerations }}
+      tolerations:
+        {{ toYaml . | nindent 8 }}
       {{ end }}
       {{ if .Values.scim.credentialsVolume }}
       volumes:
@@ -70,6 +78,10 @@ spec:
               - all
               add:
               - "NET_BROADCAST"
+          {{ with .Values.scim.imagePullSecrets }}
+          imagePullSecrets:
+            {{ toYaml . | nindent 12 }}
+          {{ end }}
           resources:
             {{ toYaml .Values.scim.resources | nindent 12 }}
           env:

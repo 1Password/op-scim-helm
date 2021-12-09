@@ -77,8 +77,10 @@ spec:
           imagePullSecrets:
             {{ toYaml . | nindent 12 }}
           {{ end }}
+          {{ with .Values.scim.resources }}
           resources:
-            {{ toYaml .Values.scim.resources | nindent 12 }}
+            {{ toYaml . | nindent 12 }}
+          {{ end }}
           env:
             - name: "OP_PORT"
               value: "{{ .Values.scim.httpPort }}"
@@ -115,11 +117,6 @@ spec:
             {{ if .Values.scim.config.prettyLogs }}
             - name: "OP_PRETTY_LOGS"
               value: {{ .Values.scim.config.prettyLogs }}
-            {{ end }}
-            # TODO: confirm if OP_ONE_CLICK is still needed
-            {{ if .Values.scim.config.oneClick }}
-            - name: "OP_ONE_CLICK"
-              value: "{{ .Values.scim.config.oneClick }}"
             {{ end }}
           ports:
             - containerPort: {{ .Values.scim.httpPort }}

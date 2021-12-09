@@ -73,11 +73,6 @@ spec:
             runAsUser: 999
             runAsGroup: 999
             allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-              - all
-              add:
-              - "NET_BROADCAST"
           {{ with .Values.scim.imagePullSecrets }}
           imagePullSecrets:
             {{ toYaml . | nindent 12 }}

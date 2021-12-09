@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/component: {{ tpl .Values.scim.name . }}
     {{ with .Values.scim.labels }}
-    {{ toYaml . | nindent 4 }}
+      {{ toYaml . | nindent 4 }}
     {{ end }}
   {{ with .Values.scim.annotations }}
   annotations:

@@ -39,18 +39,18 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{ range $k, $v := . }}{{ if not $local.first }},{{ end }}{{ $v }}{{ $_ := set $local "first" false }}{{ end }}
 {{ end }}
 
-{{ define "op-scim-bridge.apiPort" }}
-{{ if .Values.connect.tls.enabled }}
-{{ .Values.connect.api.httpsPort  }}
+{{ define "op-scim-bridge.port" }}
+{{ if .Values.scim.tls.enabled }}
+{{ .Values.scim.httpsPort  }}
 {{ else }}
-{{ .Values.connect.api.httpPort  }}
+{{ .Values.scim.httpPort  }}
 {{ end }}
 {{ end }}
 
 {{ define "op-scim-bridge.url" }}
-{{ if .Values.connect.tls.enabled }}
-https://{{ .Values.connect.applicationName }}:{{ .Values.connect.api.httpsPort  }}
+{{ if .Values.scim.tls.enabled }}
+https://{{ .Values.scim.name }}:{{ .Values.scim.httpsPort  }}
 {{ else }}
-http://{{ .Values.connect.applicationName }}:{{ .Values.connect.api.httpPort  }}
+http://{{ .Values.scim.applicationName }}:{{ .Values.scim.httpPort  }}
 {{ end }}
 {{ end }}

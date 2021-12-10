@@ -96,4 +96,3 @@ redis:
 # acceptanceTests is used by the tests run during CI (see op-scim-bridge/templates/tests)
 acceptanceTests:
   enabled: false
-  fixtures: {}

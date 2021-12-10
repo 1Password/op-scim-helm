@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: {{ tpl .Values.scim.name . }}
+  name: {{ tpl .Values.scim.name . }}
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/component: {{ tpl .Values.scim.name . }}

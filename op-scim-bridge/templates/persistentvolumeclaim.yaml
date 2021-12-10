@@ -1,14 +1,28 @@
+{{ if .Values.scim.credentialsVolume }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Values.applicationName }}-pvc
+  name: {{ tpl .Values.scim.name . }}-pvc
+  namespace: {{ .Release.Namespace }}
   labels:
-    app.kubernetes.io/application: {{ .Values.applicationName }}
-    app.kubernetes.io/component: op-scim-bridge
+    app.kubernetes.io/application: {{ tpl .Values.scim.name . }}
+    {{ with .Values.scim.labels }}
+      {{ toYaml . | nindent 4 }}
+    {{ end }}
+  {{ with .Values.scim.annotations }}
+  annotations:
+    {{ toYaml . | nindent 4 }}
+  {{ end }}
 spec:
+  {{ with .Values.scim.credentialsVolume.accessModes }}
   accessModes:
-    - ReadWriteOnce
+    {{ toYaml . | nindent 4 }}
+  {{ end }}
+  {{ with .Values.scim.credentialsVolume.resources }}
   resources:
-    requests:
-      storage: 1Gi
-  storageClassName: {{ .Values.storageClass }}
+    {{ toYaml . | nindent 4 }}
+  {{ end }}
+  {{ if .Values.scim.credentialsVolume.storageClass }}
+  storageClassName: {{ .Values.scim.credentialsVolume.storageClass }}
+  {{ end }}
+{{ end }}

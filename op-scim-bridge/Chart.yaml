@@ -1,17 +1,21 @@
 apiVersion: v2
 name: op-scim
 version: 2.3.0
-description: The 1Password SCIM bridge
+description: A Helm chart for deploying the 1Password SCIM bridge
 keywords:
-  - "azure active directory"
-  - "okta"
-  - "provisioning"
-  - "SCIM"
   - "1Password"
+  - "1Password SCIM bridge"
+  - "SCIM"
+  - "automated provisioning"
+  - "Azure Active Directory"
+  - "JumpCloud"
+  - "Okta"
+  - "OneLogin"
+  - "Rippling"
 home: https://support.1password.com/scim
-maintainers: # (optional)
-  - name: 1Password Platform Integrations Team
-    email: support+business@1password.com
+maintainers:
+  - name: 1Password Provisioning Team
+    email: support+scim@1password.com
 icon: https://1password.com/img/logo-v1.svg
 appVersion: v2.3.0
 dependencies:

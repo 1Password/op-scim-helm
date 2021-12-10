@@ -24,6 +24,9 @@ jobs:
         with:
           version: v3.4.0
 
+      - name: Lint chart
+        run: ct lint --config ct.yaml
+
       - name: Check if chart has changed
         id: list-changed
         run: |
@@ -31,9 +34,6 @@ jobs:
           if [[ -n "$changed" ]]; then
             echo "::set-output name=changed::true"
           fi
-
-      - name: Lint chart
-        run: ct lint --config ct.yaml
 
       - name: Install yq
         run: sudo snap install yq

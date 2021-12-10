@@ -1,0 +1,7 @@
+remote: origin
+target-branch: main
+validate-maintainers: false
+debug: false
+helm-extra-args: --timeout 120s
+charts:
+  - op-scim-bridge

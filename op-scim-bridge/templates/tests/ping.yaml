@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Release.Name }}-ping-check"
   namespace: {{ .Release.Namespace }}
   labels:
-    {{ include "op-scim-bridge.url.labels" . | nindent 4 }}
+    {{ include "op-scim-bridge.labels" . | nindent 4 }}
     {{ with .Values.scim.labels }}
       {{ toYaml . | nindent 4 }}
     {{ end }}

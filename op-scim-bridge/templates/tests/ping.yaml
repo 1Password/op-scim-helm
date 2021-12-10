@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-ping-check"
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{ include "op-scim-bridge.url.labels" . | nindent 4 }}
+    {{ with .Values.scim.labels }}
+      {{ toYaml . | nindent 4 }}
+    {{ end }}
+  annotations:
+    helm.sh/hook: test
+    helm.sh/hook-weight: "1"
+spec:
+  restartPolicy: Never
+  containers:
+    - name: curl
+      image: curlimages/curl
+      command: ["curl", "{{ include "op-scim-bridge.url" . }}/ping"]

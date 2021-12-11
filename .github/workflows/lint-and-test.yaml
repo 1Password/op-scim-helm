@@ -1,5 +1,24 @@
 name: Lint and test charts
-on: [push, pull_request]
+on:
+  push:
+
+  # Workflow dispatch listener to enable on-demand acceptance test runs on external PRs.
+  # How to use this:
+  # * Do a sanity check on the submitted PR
+  # * Copy the most recent commit hash of the PR branch
+  # * Go to 'Actions' -> 'Run acceptance tests' -> 'Run workflow'
+  # * Fill in the following:
+  #   * `checkout-repo`: `<PR author>/op-scim-helm`
+  #   * `checkout-ref`: <copied commit hash>
+  #   * `branch`: `acceptance-tests-on-forks`
+  workflow_dispatch:
+    inputs:
+      checkout-repo:
+        description: "Checkout repo"
+        required: false
+      checkout-ref:
+        description: "Chekout ref"
+        required: false
 
 jobs:
   lint-and-test:
@@ -7,6 +26,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          repository: ${{ github.event.inputs.checkout-repo }}
+          ref: ${{ github.event.inputs.checkout-ref }}
 
       - name: Set up Helm
         uses: azure/setup-helm@v1

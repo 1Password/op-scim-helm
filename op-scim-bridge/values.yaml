@@ -50,7 +50,7 @@ scim:
   # config sets the configuration options
   config:
     # redisURL sets the Redis connection URL
-    redisURL: "redis://{{ .Chart.Name }}-bridge-redis-master:6379"
+    redisURL: "redis://{{ .Release.Namespace }}-redis-master:6379"
     # domain sets the allowed 1Password sign in URL. Not set by default.
     # domain: example.1password.com
     # letsEncryptDomain sets the domain to attempt to get a certificate for via Let's Encrypt

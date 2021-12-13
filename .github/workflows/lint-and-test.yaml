@@ -72,8 +72,6 @@ jobs:
             enabled: true
           EOF
           for values_file in op-scim-bridge/ci/*.yaml; do
-            # Disable credentials volume; enable credentials secret
-            yq eval '.scim.credentialsVolume = {} | .scim.credentialsSecret = {}' -i $values_file
             # Add secrets
             yq eval '.scim.credentialsSecret.value = strenv(OP_SESSION) | .scim.credentialsSecret.token.value = strenv(OP_TOKEN)' -i $values_file
             # Add acceptance test fixtures

@@ -1,7 +1,7 @@
 scim:
-  # credentialsVolume: null
-  # credentialsSecret:
-    # name: "{{ .Chart.Name }}-bridge-credentials"
-    # key: scimsession
-    # token:
-      # name: "{{ .Chart.Name }}-bridge-credentials-token"
+  credentialsVolume: null
+  credentialsSecret:
+    name: "{{ .Chart.Name }}-bridge-credentials"
+    key: scimsession
+    token:
+      name: "{{ .Chart.Name }}-bridge-credentials-token"

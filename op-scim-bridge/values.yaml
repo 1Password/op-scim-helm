@@ -21,12 +21,12 @@ scim:
     # storageClass:
   # credentialsSecret configures the SCIM bridge to access the credentials via a secret
   # credentialsSecret:
-  # name of the secret
-  # name: "{{ .Chart.Name }}-bridge-credentials"
-  # key of the secret
-  # key: scimsession
-  # value of the secret
-  # value: "base64 encoded scimsession file"
+    # name of the secret
+    # name: "{{ .Chart.Name }}-bridge-credentials"
+    # key of the secret
+    # key: scimsession
+    # value of the secret
+    # value: "base64 encoded scimsession file"
   # imageRepository sets the 1Password SCIM bridge image to use
   imageRepository: 1password/scim
   # imagePullPolicy sets the image pull policy

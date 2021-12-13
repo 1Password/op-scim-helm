@@ -51,6 +51,6 @@ app.kubernetes.io/instance: {{- .Release.Name -}}
 {{- if .Values.scim.tls.enabled -}}
 https://{{- .Values.scim.name -}}:{{- .Values.scim.httpsPort  -}}
 {{- else -}}
-http://{{- .Values.scim.applicationName -}}:{{- .Values.scim.httpPort  -}}
+http://{{- .Values.scim.name -}}:{{- .Values.scim.httpsPort  -}}
 {{- end -}}
 {{- end -}}

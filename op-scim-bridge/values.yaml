@@ -5,29 +5,29 @@ scim:
   # version of the SCIM bridge
   version: "{{ .Chart.AppVersion }}"
   # credentialsVolume configures the SCIM bridge to access the credentials via a volume
-  # credentialsVolume:
-  #   # name of the volume
-  #   name: "{{ .Chart.Name }}-bridge-credentials"
-  #   # name of the file to mount within the volume
-  #   file: scimsession
-  #   # accessModes for the volume
-  #   accessModes:
-  #     - ReadWriteOnce
-  #   # resources configuration for the volume
-  #   resources:
-  #     requests:
-  #       storage: 1Gi
-  #   # storageClass for the volume. do-block-storage is recommended for Digital Ocean
-  #   # storageClass:
-  # # credentialsSecret configures the SCIM bridge to access the credentials via a secret
-  credentialsSecret:
-    # name of the secret
+  credentialsVolume:
+    # name of the volume
     name: "{{ .Chart.Name }}-bridge-credentials"
-    # key of the secret
-    key: scimsession
-    # value of the secret
-    value: "eyJ2ZXJzaW9uIjoiMiIsInZlcmlmaWVyIjp7InNhbHQiOiJkSk1TVUtoOHQzVEJ5LU1hYWJSRGRBIiwibG9jYWxIYXNoIjoidWpyTE4tVkcwT3lMVEhteDA4d2lmb0ZHR0JjNDROU3hWR0RFV1lxVU9nYyJ9LCJlbmNDcmVkZW50aWFscyI6eyJraWQiOiJsb2NhbGF1dGh2MmtleWtpZCIsImVuYyI6IkEyNTZHQ00iLCJjdHkiOiJiNStqd2sranNvbiIsIml2IjoiMWxHV0ZGVzFRaW1CbEJ3XyIsImRhdGEiOiJyRE41ZGJhbzBzdjlWZjM0bmxJbXBISjgybS10S3IxV1VseFRfMWhiSnVxLU5ia0dJR2c0aXRYRTBwZWk4T05DVFk2MkRtUmtiWXBDVlBTdmpsSGNWdEJWZDN5Q2RiRmNoQ0JDX21USzJWLXYwZzRqYkY3MHgwNldqakJpSUtTWXEwOGJpZkw2dXM4X01jODdWSW1QMnUwMEF5eVZuc2FSMFlUZU9ZMk4xNkJDZ1gzSURSTFJPVjl5V3E4bnNUV0xmUkc2cnlac2lJY1FBTy1zTzdud1hRT3pSMzdxOXg5YnpNQWpQemk5MEthWk5YbmVkRklBMGxROXppaFQtSHhfV3BZWHZINzI1OVNoT3pnTXluQmtuQTR5c3pOY0lydVFTSkg1MXpiZVlwU2NGNDN2N3ZvSHEzWVhacEJTSGFnellvM1IxcGJwSU1WTW5uazJlWFFlbF9CMkVIUU5NT0ZZdDFWNGVTUzR0WkxOclNqWG1mSUFoTTc5VkpQQnFWcGxuUzhUcG1wUnJZellncUhIVUM5Zkk3YS1wYU0zbk9RalhqMUFXTVFvUGpwS0ZIMVB0U1ZMVVFWdVpqWVE1eVhocEt5Q3pqUmJNa1QwZVFTbGowYTFYZGxscV9IUXBldHpTQUMtdEh6NUM1VHNmdXJOTFJmV1hVMEFnVjBmMTJqOXpLcFFDSl95dGROWmdHM2swU0drajF4RHRvQUJRaEdDbXgtY0FhYkVhRjlpOVd3Y1kxV0ZxbElORkllT0hody0xU1pnR1lxX1dNX1FyZHpMSFdNbmZjTTZCUzI2UHFZZnVweXc3dnJNLUhKZVJtaC1UNG9oU19BZU5tMWFfUUZpeFF0OUY2bGpGMVBIVHZiZl9mUkRCbEhmbm0wIn0sImhlYWx0aFZlcmlmaWVyIjp7InNhbHQiOiJQWklwRzE2VnFCZW1CSkpsZG1OUjNRIiwibG9jYWxIYXNoIjoidTFVbzhNWDJCWEhyVzVJY0tkUldVR0RkVDMzOUV2WnNEVTh0dmlNR3I0OCJ9LCJkZXZpY2VVdWlkIjoiYzQ3ZnNwMnR0ZGRrdjN2aXd5bmQ3czNneW0iLCJkb21haW4iOiJkdi5vcC1zY2ltLWRlbW8uY29tIn0="
-  # imageRepository sets the 1Password SCIM bridge image to use
+    # name of the file to mount within the volume
+    file: scimsession
+    # accessModes for the volume
+    accessModes:
+      - ReadWriteOnce
+    # resources configuration for the volume
+    resources:
+      requests:
+        storage: 1Gi
+    # storageClass for the volume. do-block-storage is recommended for Digital Ocean
+    # storageClass:
+  # credentialsSecret configures the SCIM bridge to access the credentials via a secret
+  # credentialsSecret:
+  #   name of the secret
+  #   name: "{{ .Chart.Name }}-bridge-credentials"
+  #   key of the secret
+  #   key: scimsession
+  #   value of the secret
+  #   value: "base64 encoded scimsession file"
+  #   imageRepository sets the 1Password SCIM bridge image to use
   imageRepository: 1password/scim
   # imagePullPolicy sets the image pull policy
   imagePullPolicy: Always

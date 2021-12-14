@@ -98,9 +98,11 @@ spec:
               value: "{{ tpl .Values.scim.config.redisURL . }}"
             - name: "OP_PING_SERVER"
               value: "{{ .Values.scim.probes.liveness.enabled }}"
-            {{ if .Values.scim.config.letsEncryptDomain }}
             - name: "OP_LETSENCRYPT_DOMAIN"
-              value: {{ .Values.scim.config.letsEncryptDomain }}
+            {{ if (eq "-" .Values.scim.config.letsEncryptDomain) }}
+              value: ""
+            {{ else }}
+              value: "{{ .Values.scim.config.letsEncryptDomain }}"
             {{ end }}
             {{ if .Values.scim.config.domain }}
             - name: "OP_DOMAIN"

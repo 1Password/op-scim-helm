@@ -5,3 +5,6 @@ scim:
     key: scimsession
     token:
       name: op-scim-bridge-credentials-token
+  httpPort: 80
+  config:
+    letsEncryptDomain: ${1:+1} # empty string

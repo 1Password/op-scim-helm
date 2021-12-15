@@ -82,7 +82,7 @@ These values set available SCIM bridge configuation options. For details on the 
 |-----|------|---------|-------------|
 | redisURL | string | `redis://op-scim-bridge-redis-master:6379` | Redis connection URL. |
 | domain | string | N/A | Allowed 1Password sign in URL. Not set by default. |
-| letsEncryptDomain | string | N/A | Domain to attempt to get a certificate for via Let's Encrypt domain. Not set by default. |
+| letsEncryptDomain | string | N/A | Domain to attempt to get a certificate for via Let's Encrypt domain. Not set by default. Set to `"-"` to disable Let's Encrypt functionality. |
 | debug | bool | `false` | Enable `DEBUG` log level instead of the default `INFO` level. |
 | jsonLogs | bool | `false` | Enable JSON log output. |
 | prettyLogs | bool | `false` | Enable colorized log output. |
@@ -98,7 +98,7 @@ Note that you should configure accessing the SCIM bridge credentials through eit
 | file | string | `scimsession` | File name. |
 | accessModes | list | `[ReadWriteOnce]` | Access modes. |
 | resources | object | `{ "requests": { "storage": "1Gi" } }` | The default storage request is `1Gi`. |
-| storageClass | string | N/A | Storage class. The default is not set since `""` has a specific meaning. `do-block-storage` is recommended for Digital Ocean. |
+| storageClass | string | N/A | Storage class. The default is not set. Set to `"-"` to set value to `""`. `do-block-storage` is recommended for Digital Ocean. |
 
 #### credentialsSecret
 

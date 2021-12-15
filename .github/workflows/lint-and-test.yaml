@@ -73,7 +73,7 @@ jobs:
           EOF
           for values_file in op-scim-bridge/ci/*.yaml; do
             # Add secrets
-            yq eval '.scim.credentialsSecret.value = strenv(OP_SESSION) | .scim.credentialsSecret.token.value = strenv(OP_TOKEN)' -i $values_file
+            yq eval '.scim.credentialsSecret.value_base64 = strenv(OP_SESSION) | .scim.credentialsSecret.token.value = strenv(OP_TOKEN)' -i $values_file
             # Add acceptance test fixtures
             yq eval-all --inplace 'select(fileIndex == 0) * select(fileIndex == 1)' $values_file fixtures.yaml
           done

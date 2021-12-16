@@ -24,7 +24,7 @@ spec:
   {{ end }}
 {{ if .Values.scim.credentialsVolume.storageClass }}
   {{ if (eq "-" .Values.scim.credentialsVolume.storageClass) }}
-  storageClassName: "\"\""
+  storageClassName: '""'
   {{ else }}
   storageClassName: "{{ .Values.scim.credentialsVolume.storageClass }}"
   {{ end }}

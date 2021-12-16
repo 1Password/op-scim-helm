@@ -5,5 +5,3 @@ scim:
     key: scimsession
     token:
       name: op-scim-bridge-credentials-token
-  config:
-    letsEncryptDomain: "-"

@@ -5,3 +5,6 @@ scim:
     key: scimsession
     token:
       name: op-scim-bridge-credentials-token
+  probes:
+    liveness:
+      enabled: false

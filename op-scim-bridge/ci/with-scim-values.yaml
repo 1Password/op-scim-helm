@@ -3,8 +3,6 @@ scim:
   credentialsSecret:
     name: op-scim-bridge-credentials
     key: scimsession
-    token:
-      name: op-scim-bridge-credentials-token
   serviceType: NodePort
   probes:
     liveness:

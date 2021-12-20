@@ -19,4 +19,7 @@ spec:
   containers:
     - name: curl
       image: curlimages/curl
-      command: ["curl", "-H 'Authorization: Bearer {{ tpl .scim.credentialsSecret.token.value . }}'", "{{ include "op-scim-bridge.url" . }}/health"]
+      command:
+        - "curl"
+        - "-H 'Authorization: Bearer {{ .Values.scim.credentialsSecret.token }}'"
+        - "{{ include "op-scim-bridge.url" . }}/health"

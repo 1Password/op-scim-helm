@@ -1,7 +1,7 @@
 remote: origin
 target-branch: main
 validate-maintainers: false
-debug: true
+debug: false
 helm-extra-args: --timeout 120s # --debug
 charts:
   - op-scim-bridge

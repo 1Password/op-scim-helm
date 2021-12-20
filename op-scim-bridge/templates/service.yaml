@@ -1,4 +1,3 @@
-{{ if not .Values.acceptanceTests.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -26,4 +25,3 @@ spec:
       port: 443
       protocol: TCP
       targetPort: {{ .Values.scim.httpsPort }}
-{{ end }}

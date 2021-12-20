@@ -49,8 +49,8 @@ app.kubernetes.io/instance: {{- .Release.Name -}}
 
 {{- define "op-scim-bridge.url" -}}
 {{- if .Values.scim.tls.enabled -}}
-https://{{- tpl .Values.scim.name . -}}:{{- .Values.scim.httpsPort  -}}
+https://"{{- tpl .Values.scim.name . -}}-svc"
 {{- else -}}
-http://{{- tpl .Values.scim.name . -}}:{{- .Values.scim.httpPort  -}}
+http://"{{- tpl .Values.scim.name . -}}-svc"
 {{- end -}}
 {{- end -}}

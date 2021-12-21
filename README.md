@@ -98,7 +98,7 @@ Note that you should configure accessing the SCIM bridge credentials through eit
 | file | string | `scimsession` | File name. |
 | accessModes | list | `[ReadWriteOnce]` | Access modes. |
 | resources | object | `{ "requests": { "storage": "1Gi" } }` | The default storage request is `1Gi`. |
-| storageClass | string | N/A | Storage class. The default is not set. Set to `"-"` to set value to `""`. `do-block-storage` is recommended for Digital Ocean. |
+| storageClass | string | unset/nil/not set | Storage class. Set to `"-"` to set value to `""` in resulting application. `do-block-storage` is recommended for Digital Ocean. |
 
 #### credentialsSecret
 

@@ -58,6 +58,7 @@ jobs:
             echo "::set-output name=changed::true"
           fi
 
+      # We install yq only when the chart has changed
       - name: Install yq
         run: sudo snap install yq
         if: steps.list-changed.outputs.changed == 'true'

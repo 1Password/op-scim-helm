@@ -1,0 +1,9 @@
+scim:
+  credentialsVolume: null
+  credentialsSecret:
+    name: op-scim-bridge-credentials
+    key: scimsession
+  serviceType: NodePort
+  probes:
+    liveness:
+      enabled: false

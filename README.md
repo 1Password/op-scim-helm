@@ -81,8 +81,8 @@ These values set available SCIM bridge configuation options. For details on the 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | redisURL | string | `redis://op-scim-bridge-redis-master:6379` | Redis connection URL. |
-| domain | string | N/A | Allowed 1Password sign in URL. Not set by default. |
-| letsEncryptDomain | string | N/A | Domain to attempt to get a certificate for via Let's Encrypt domain. Not set by default. |
+| domain | string | unset | Allowed 1Password sign in URL. Not set by default. |
+| letsEncryptDomain | string | unset | Domain to attempt to get a certificate for via Let's Encrypt domain. Not set by default. |
 | debug | bool | `false` | Enable `DEBUG` log level instead of the default `INFO` level. |
 | jsonLogs | bool | `false` | Enable JSON log output. |
 | prettyLogs | bool | `false` | Enable colorized log output. |
@@ -98,7 +98,7 @@ Note that you should configure accessing the SCIM bridge credentials through eit
 | file | string | `scimsession` | File name. |
 | accessModes | list | `[ReadWriteOnce]` | Access modes. |
 | resources | object | `{ "requests": { "storage": "1Gi" } }` | The default storage request is `1Gi`. |
-| storageClass | string | N/A | Storage class. The default is not set since `""` has a specific meaning. `do-block-storage` is recommended for Digital Ocean. |
+| storageClass | string | unset | Storage class. Set to `"-"` to set value to `""` in resulting application. `do-block-storage` is recommended for Digital Ocean. |
 
 #### credentialsSecret
 
@@ -108,7 +108,9 @@ Note that you should configure accessing the SCIM bridge credentials through eit
 |-----|------|---------|-------------|
 | name | string | `op-scim-bridge-credentials` | Secret name. |
 | key | string | `scimsession` | Secret key. |
-| value | string | `base64 encoded scimsession file` | Base64 encoded scimsession file. |
+| value_json | string | `{}` | JSON contents of the scimsession file. |
+| value_base64 | string | `""` | Base64 encoded contents of the scimsession file. |
+
 
 ### redis
 

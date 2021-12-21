@@ -17,16 +17,18 @@ scim:
     resources:
       requests:
         storage: 1Gi
-    # storageClass for the volume. do-block-storage is recommended for Digital Ocean
+    # storageClass for the volume. do-block-storage is recommended for Digital Ocean. Set to "-" to set storageClass to "".
     # storageClass:
   # credentialsSecret configures the SCIM bridge to access the credentials via a secret
   # credentialsSecret:
-  # # name of the secret
-  # name: "{{ .Chart.Name }}-bridge-credentials"
-  # # key of the secret
-  # key: scimsession
-  # # value of the secret
-  # value: "base64 encoded scimsession file"
+    # name of the secret
+    # name: "{{ .Chart.Name }}-bridge-credentials"
+    # key of the secret
+    # key: scimsession
+    # value_json is the JSON contents of the scimsession file
+    # value_json: "{}"
+    # value_base64 is the base64 encoded contents of the scimsession file
+    # value_base64: "base64 encoded scimsession file"
   # imageRepository sets the 1Password SCIM bridge image to use
   imageRepository: 1password/scim
   # imagePullPolicy sets the image pull policy
@@ -50,17 +52,20 @@ scim:
   # config sets the configuration options
   config:
     # redisURL sets the Redis connection URL
-    redisURL: "redis://{{ .Chart.Name }}-bridge-redis-master:6379"
-    # # domain sets the allowed 1Password sign in URL. Not set by default.
+    redisURL: "redis://{{ .Release.Namespace }}-redis-master:6379"
+    # domain sets the allowed 1Password sign in URL. Not set by default.
     # domain: example.1password.com
-    # # letsEncryptDomain sets the domain to attempt to get a certificate for via Let's Encrypt
+    # letsEncryptDomain sets the domain to attempt to get a certificate for via Let's Encrypt.
     # letsEncryptDomain: scim.example.com
-    # # debug enables DEBUG log level instead of the default INFO level
+    # debug enables DEBUG log level instead of the default INFO level
     # debug: false
-    # # jsonLogs enables JSON log output
+    # jsonLogs enables JSON log output
     # jsonLogs: false
-    # # prettyLogs enables colorized log output
+    # prettyLogs enables colorized log output
     # prettyLogs: false
+  tls:
+    enabled: false
+    secret: "{{ .Chart.Name }}-bridge-tls"
   # resource sets the requests and/or limits for the SCIM bridge pod
   resources: {}
   # annotations adds additional annotations
@@ -89,3 +94,7 @@ redis:
   cluster:
     enabled: false
   usePassword: false
+
+# acceptanceTests is used by the tests run during CI (see op-scim-bridge/templates/tests)
+acceptanceTests:
+  enabled: false

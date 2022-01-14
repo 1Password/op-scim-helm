@@ -79,7 +79,13 @@ scim:
   # nodeSelector sets the node selector for the SCIM bridge pod
   nodeSelector: {}
   # affinity sets the affinity for the SCIM bridge pod
-  affinity: {}
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app: redis
+          topologyKey: topology.kubernetes.io/zone
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
 
@@ -94,6 +100,16 @@ redis:
   cluster:
     enabled: false
   usePassword: false
+  # prefer to schedule redis and SCIM bridge pods on separate nodes
+  # this configuration should be duplicated for replica.affinity when not running redis as a standalone instance
+  master:
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: op-scim-bridge
+            topologyKey: topology.kubernetes.io/zone
 
 # acceptanceTests is used by the tests run during CI (see op-scim-bridge/templates/tests)
 acceptanceTests:

@@ -84,7 +84,7 @@ scim:
       requiredDuringSchedulingIgnoredDuringExecution:
         - labelSelector:
             matchLabels:
-              app: "redis"
+              app: redis
           topologyKey: topology.kubernetes.io/zone
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
@@ -108,7 +108,7 @@ redis:
         requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchLabels:
-                app: "op-scim-bridge"
+                app: op-scim-bridge
             topologyKey: topology.kubernetes.io/zone
 
 # acceptanceTests is used by the tests run during CI (see op-scim-bridge/templates/tests)

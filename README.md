@@ -73,6 +73,7 @@ The values are split into two sections:
 | nodeSelector | object | `{}` | Node selector for SCIM bridge pod. |
 | affinity | object | `{ "podAntiAffinity": {} }` | Affinity for SCIM bridge pod. By default we configure pod anti-affinity to ensure redis and SCIM bridge pods are not scheduled on the same node. |
 | tolerations | list | `[]` | Tolerations for SCIM bridge pod. |
+| init| object | `{}`| Resources for init containers|
 
 #### config
 

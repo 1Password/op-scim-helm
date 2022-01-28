@@ -88,7 +88,8 @@ scim:
           topologyKey: topology.kubernetes.io/zone
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
-
+  init:
+    resources: {}
 # redis configuration options (see upstream chart documentation and README.MD)
 redis:
   enabled: true

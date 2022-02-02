@@ -88,7 +88,8 @@ scim:
           topologyKey: topology.kubernetes.io/zone
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
-  init:
+  # initContainers sets config options for the init containers
+  initContainers:
     resources: {}
 # redis configuration options (see upstream chart documentation and README.MD)
 redis:

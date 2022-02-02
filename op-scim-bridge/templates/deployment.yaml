@@ -63,7 +63,7 @@ spec:
           volumeMounts:
             - mountPath: /home/opuser/.op
               name: {{ tpl .Values.scim.name . }}-credentials
-      {{ end }}
+      {{- end }}
       containers:
         - name: {{ tpl .Values.scim.name . }}
           image: {{ .Values.scim.imageRepository }}:{{ tpl .Values.scim.version . }}

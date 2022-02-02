@@ -63,6 +63,10 @@ spec:
           volumeMounts:
             - mountPath: /home/opuser/.op
               name: {{ tpl .Values.scim.name . }}-credentials
+          {{ with .Values.scim.initContainers.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       {{- end }}
       containers:
         - name: {{ tpl .Values.scim.name . }}

@@ -112,15 +112,15 @@ spec:
             {{- end }}
             {{- if .Values.scim.config.debug }}
             - name: "OP_DEBUG"
-              value: {{ .Values.scim.config.debug }}
+              value: "{{ .Values.scim.config.debug }}"
             {{- end }}
             {{- if .Values.scim.config.jsonLogs }}
             - name: "OP_JSON_LOGS"
-              value: {{ .Values.scim.config.jsonLogs }}
+              value: "{{ .Values.scim.config.jsonLogs }}"
             {{- end }}
             {{- if .Values.scim.config.prettyLogs }}
             - name: "OP_PRETTY_LOGS"
-              value: {{ .Values.scim.config.prettyLogs }}
+              value: "{{ .Values.scim.config.prettyLogs }}"
             {{- end }}
           ports:
             - containerPort: {{ .Values.scim.httpPort }}

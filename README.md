@@ -73,6 +73,7 @@ The values are split into two sections:
 | nodeSelector | object | `{}` | Node selector for SCIM bridge pod. |
 | affinity | object | `{ "podAntiAffinity": {} }` | Affinity for SCIM bridge pod. By default we configure pod anti-affinity to ensure redis and SCIM bridge pods are not scheduled on the same node. |
 | tolerations | list | `[]` | Tolerations for SCIM bridge pod. |
+| initContainers | object | `{}` | Configuration options for init containers. |
 
 #### config
 
@@ -123,5 +124,3 @@ This is a small subset of possible the values that you can configure for Redis. 
 | cluster | object | `{"enabled": false }` | Redis cluster is disabled by default. |
 | usePassword | bool | `false` | Use password is disabled by default. |
 | master.affinity | object | `{ "affinity": "podAntiAffinity": {} }` | Master affinity. By default we configure pod anti-affinity to ensure redis and SCIM bridge pods are not scheduled on the same node. Note that this configuration should be duplicated for the slave when not running redis in standalone mode. |
-
-

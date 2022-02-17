@@ -21,3 +21,7 @@
 .idea/
 *.tmproj
 .vscode/
+# Tests
+templates/tests/
+# CI
+ci/

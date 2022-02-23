@@ -88,6 +88,49 @@ scim:
           topologyKey: topology.kubernetes.io/zone
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
+  # replicaCount sets number of replicas to deploy
+  replicaCount: 1
+  # autoscaling if enabled creates a HorizontalPodAutoscaler resource. Will override replicaCount
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  # podDisruptionBudget if enabled creates a podDisruptionBudget resource. 
+  # require more than 1 replica or autoscaling enabled to be effective.
+  podDisruptionBudget:
+    enabled: false
+    minAvailable: 1
+    annotations: {}
+  # Service Account to use. If using externally created 
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+    hosts: []
+      # - host: chart-example.local
+      #   paths:
+      #     - path: /
+      #       pathType: ImplementationSpecific
+    tls: []
+      #  - secretName: chart-example-tls
+      #    hosts:
+      #      - chart-example.local
+  # serviceMonitor if enabled create prometheus ServiceMonitor for auto discovery
+  serviceMonitor:
+    enabled: false
+    # namespace to deploy the service monitor to. Usually should match the namespace Prometheus Operator is deployed at
+    # https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/getting-started.md
+    namespace: ""
   # initContainers sets config options for the init containers
   initContainers:
     resources: {}

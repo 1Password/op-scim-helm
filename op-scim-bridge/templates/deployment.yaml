@@ -16,7 +16,9 @@ spec:
   selector:
     matchLabels:
       app: {{ tpl .Values.scim.name . }}
-  replicas: 1
+  {{- if not .Values.scim.autoscaling.enabled }}
+  replicas: {{ .Values.scim.replicaCount }}
+  {{- end }}
   strategy:
     type: Recreate
   template:
@@ -33,6 +35,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
+      {{- if .Values.scim.serviceAccount.name }}
+      serviceAccountName: {{ .Values.scim.serviceAccount.name }}
+      {{- else }}
+      serviceAccountName: {{ tpl .Values.scim.name . }}
+      {{- end }}
       {{- with .Values.scim.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

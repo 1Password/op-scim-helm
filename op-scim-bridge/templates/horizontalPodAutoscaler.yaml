@@ -1,0 +1,32 @@
+{{- if .Values.scim.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ tpl .Values.scim.name . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: {{ tpl .Values.scim.name . }}
+    {{- with .Values.scim.labels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ tpl .Values.scim.name . }}
+  minReplicas: {{ .Values.scim.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.scim.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.scim.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.scim.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.scim.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.scim.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

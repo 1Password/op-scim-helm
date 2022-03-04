@@ -88,6 +88,35 @@ scim:
           topologyKey: topology.kubernetes.io/zone
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
+  # replicaCount sets number of replicas to deploy
+  replicaCount: 1
+  # autoscaling if enabled creates a HorizontalPodAutoscaler resource. Will override replicaCount
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 2
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  # podDisruptionBudget configuration. Requires more than 1 replica or
+  # autoscaling to be enabled to be effective.
+  podDisruptionBudget:
+    enabled: false
+    minAvailable: 1
+    annotations: {}
+  # serviceAccount configuration. Default service account is used when disabled.
+  serviceAccount:
+    # create determines whether a service account should be created
+    create: true
+    # annotations to add to the service account
+    annotations: {}
+    # name of the service account to use
+    # If not set and create is true, a name is generated using the full name template.
+    name: ""
+  # serviceMonitor if enabled create prometheus ServiceMonitor for auto discovery
+  serviceMonitor:
+    enabled: false
+    # namespace to deploy the service monitor to
+    namespace: ""
   # initContainers sets config options for the init containers
   initContainers:
     resources: {}

@@ -39,8 +39,10 @@ scim:
   httpPort: 8080
   # httpsPort sets the HTTPS port used by the SCIM bridge
   httpsPort: 8443
-  # serviceType defines the service type to configure
-  serviceType: LoadBalancer
+  # service defines the configuration for a service resource
+  service:
+    enabled: true
+    type: LoadBalancer
   ingress:
     enabled: false
     className: ""

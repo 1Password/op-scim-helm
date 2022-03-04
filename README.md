@@ -63,6 +63,7 @@ The values are split into two sections:
 | httpPort | int | `8080` | HTTP port. |
 | httpsPort | int | `8443` | HTTPS port. |
 | serviceType | string | `LoadBalancer` | Service type. |
+| ingress | object | `{}` | Ingress configuration.  |
 | probes | object | `{ "liveness": { "enabled": true, "path": "/ping" } }` | Liveness probe that uses the `GET /ping` endpoint for health checks. |
 | config | object | `{}` | SCIM bridge config options. See [config](#config) for details. |
 | resources | object | `{}` | Resource requests and/or limits for the SCIM bridge pod. |

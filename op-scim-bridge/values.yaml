@@ -43,6 +43,7 @@ scim:
   service:
     enabled: true
     type: LoadBalancer
+  # ingress defines the configuration for an ingress resource
   ingress:
     enabled: false
     className: ""

@@ -47,7 +47,6 @@ scim:
   ingress:
     enabled: false
     className: ""
-    annotations: {}
     hosts: []
       # - host: chart-example.local
       #   paths:
@@ -118,13 +117,10 @@ scim:
   podDisruptionBudget:
     enabled: false
     minAvailable: 1
-    annotations: {}
   # serviceAccount configuration. Default service account is used when disabled.
   serviceAccount:
     # create determines whether a service account should be created
     create: true
-    # annotations to add to the service account
-    annotations: {}
     # name of the service account to use
     # If not set and create is true, a name is generated using the full name template.
     name: ""

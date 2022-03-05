@@ -133,6 +133,11 @@ scim:
     enabled: false
     # namespace to deploy the service monitor to
     namespace: ""
+    # bearerTokenSecret specifies the secret that contains the SCIM bridge bearer token
+    bearerTokenSecret:
+      {}
+      # key: secret-key
+      # name: secret-name
   # initContainers sets config options for the init containers
   initContainers:
     resources: {}

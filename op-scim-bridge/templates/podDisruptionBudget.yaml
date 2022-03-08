@@ -1,0 +1,17 @@
+{{- if .Values.scim.podDisruptionBudget.enabled -}}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ tpl .Values.scim.name . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: {{ tpl .Values.scim.name . }}
+    {{- with .Values.scim.labels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  minAvailable: {{ .Values.scim.podDisruptionBudget.minAvailable }}
+  selector:
+    matchLabels:
+      app: {{ tpl .Values.scim.name . }}
+{{- end }}

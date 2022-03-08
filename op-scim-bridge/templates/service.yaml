@@ -1,3 +1,4 @@
+{{- if .Values.scim.service.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -13,7 +14,7 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  type: {{ .Values.scim.serviceType }}
+  type: {{ .Values.scim.service.type }}
   selector:
     app: {{ tpl .Values.scim.name . }}
   ports:
@@ -25,3 +26,4 @@ spec:
       port: 443
       protocol: TCP
       targetPort: {{ .Values.scim.httpsPort }}
+{{- end }}

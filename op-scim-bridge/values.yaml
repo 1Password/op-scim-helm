@@ -164,6 +164,13 @@ redis:
               matchLabels:
                 app: op-scim-bridge
             topologyKey: topology.kubernetes.io/zone
+    resources:
+      requests:
+        cpu: 125m
+        memory: 256M
+      limits:
+        cpu: 250m
+        memory: 512M
 
 # acceptanceTests is used by the tests run during CI (see op-scim-bridge/templates/tests)
 acceptanceTests:

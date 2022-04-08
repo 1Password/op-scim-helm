@@ -130,3 +130,5 @@ This is a small subset of possible the values that you can configure for Redis. 
 | cluster | object | `{"enabled": false }` | Redis cluster is disabled by default. |
 | usePassword | bool | `false` | Use password is disabled by default. |
 | master.affinity | object | `{ "affinity": "podAntiAffinity": {} }` | Master affinity. By default we configure pod anti-affinity to ensure redis and SCIM bridge pods are not scheduled on the same node. Note that this configuration should be duplicated for the slave when not running redis in standalone mode. |
+| master.resources | object | `{}` | Master resource requests and limits. |
+| master.extraFlags | object | `{}` | Master extra flags. By default set a maximum memory limit and define the policy to use when key eviction is required. |

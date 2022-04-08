@@ -82,7 +82,13 @@ scim:
     enabled: false
     secret: "{{ .Chart.Name }}-bridge-tls"
   # resource sets the requests and/or limits for the SCIM bridge pod
-  resources: {}
+  resources:
+    requests:
+      cpu: 125m
+      memory: 256M
+    limits:
+      cpu: 250m
+      memory: 512M
   # annotations adds additional annotations
   annotations: {}
   # labels adds additional labels

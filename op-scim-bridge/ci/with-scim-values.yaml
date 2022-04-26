@@ -9,3 +9,5 @@ scim:
   probes:
     liveness:
       enabled: false
+  config:
+    redisURL: "redis://{{ .Release.Namespace }}-redis-master:6379"

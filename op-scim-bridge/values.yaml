@@ -146,6 +146,7 @@ scim:
 # redis configuration options (see upstream chart documentation and README.MD)
 redis:
   enabled: true
+  nameOverride: "redis"
   image:
     registry: docker.io
     repository: bitnami/redis

@@ -6,7 +6,7 @@ on:
   # How to use this:
   # * Do a sanity check on the submitted PR
   # * Copy the most recent commit hash of the PR branch
-  # * Go to 'Actions' -> 'Run acceptance tests' -> 'Run workflow'
+  # * Go to 'Actions' -> 'Lint and test charts' -> 'Run workflow'
   # * Fill in the following:
   #   * `checkout-repo`: `<PR author>/op-scim-helm`
   #   * `checkout-ref`: <copied commit hash>

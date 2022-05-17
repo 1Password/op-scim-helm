@@ -14,7 +14,11 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
+  {{- if not .Values.scim.ingress.enable }}
   type: {{ .Values.scim.service.type }}
+  {{- else if .Values.scim.ingress.enabled }}
+  type: ClusterIP
+  {{- end }}
   selector:
     app: {{ tpl .Values.scim.name . }}
   ports:

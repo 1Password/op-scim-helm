@@ -6,10 +6,13 @@ scim:
   version: "{{ .Chart.AppVersion }}"
   # credentialsVolume configures the SCIM bridge to access the credentials via a volume
   credentialsVolume:
+    # enables the `credentialsVolume`. Defaults to `false`. Either `credentialsSecret` or `cedentialsVolume` must be specified, but not both
+    enabled: false
     # name of the volume
     name: "{{ .Chart.Name }}-bridge-credentials"
     # name of the file to mount within the volume
     file: scimsession
+    # 
     # accessModes for the volume
     accessModes:
       - ReadWriteOnce
@@ -20,15 +23,15 @@ scim:
     # storageClass for the volume. do-block-storage is recommended for Digital Ocean. Set to "-" to set storageClass to "".
     # storageClass:
   # credentialsSecret configures the SCIM bridge to access the credentials via a secret
-  # credentialsSecret:
+  credentialsSecret:
+    # enables the `credentialsSecret`. Defaults to `true`. Either `credentialsSecret` or `cedentialsVolume` must be specified, but not both
+    enabled: true
     # name of the secret
-    # name: "{{ .Chart.Name }}-bridge-credentials"
+    name: "{{ .Chart.Name }}-bridge-credentials"
     # key of the secret
-    # key: scimsession
-    # value_json is the JSON contents of the scimsession file
-    # value_json: "{}"
-    # value_base64 is the base64 encoded contents of the scimsession file
-    # value_base64: "base64 encoded scimsession file"
+    key: scimsession
+    # data is the contents of the scimsession file, passed in as a file or an unencoded JSON string
+    data:
   # imageRepository sets the 1Password SCIM bridge image to use
   imageRepository: 1password/scim
   # imagePullPolicy sets the image pull policy
@@ -46,16 +49,12 @@ scim:
   # ingress defines the configuration for an ingress resource
   ingress:
     enabled: false
-    className: ""
-    hosts: []
-      # - host: chart-example.local
-      #   paths:
-      #     - path: /
-      #       pathType: ImplementationSpecific
-    tls: []
-      #  - secretName: chart-example-tls
-      #    hosts:
-      #      - chart-example.local
+    className:
+    domain:
+    path: \
+    tls:
+      enabled: false
+      secretName: "{{ .Chart.Name }}-bridge-tls"
   # probes configures the liveness probe used for the SCIM bridge pod
   probes:
     # liveness contains the liveness probe config

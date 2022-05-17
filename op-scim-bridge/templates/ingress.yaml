@@ -29,25 +29,23 @@ spec:
   {{- if and .Values.scim.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
   ingressClassName: {{ .Values.scim.ingress.className }}
   {{- end }}
-  {{- if .Values.scim.ingress.tls }}
+  {{- with .Values.scim.ingress }}
+  {{- if .tls.enabled }}
   tls:
-    {{- range .Values.scim.ingress.tls }}
-    - hosts:
-        {{- range .hosts }}
-        - {{ . | quote }}
-        {{- end }}
-      secretName: {{ .secretName }}
-    {{- end }}
+    - hosts: 
+        - {{ .domain | quote }}
+      # TODO: Figure out why templating this in the values file doesn't work
+      secretName: "{{ $.Chart.Name }}-bridge-tls"
+  {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.scim.ingress.hosts }}
-    - host: {{ .host | quote }}
+    {{- if .Values.scim.ingress.domain }}
+    - host: {{ .Values.scim.ingress.domain | quote }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-            pathType: {{ .pathType }}
+          - path: {{ .Values.scim.ingress.path }}
+            {{- if and .Values.scim.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .Values.scim.ingress.pathType }}
             {{- end }}
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
@@ -60,5 +58,6 @@ spec:
               servicePort: 80
               {{- end }}
           {{- end }}
-    {{- end }}
+    {{ else }}
+      {{- fail "A domain for the deployment must be specified. This is *not* a 1Password.com address. Example: '1password-scim-bridge.yoursite.com'" }}
 {{- end }}

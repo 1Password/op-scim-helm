@@ -1,0 +1,5 @@
+*.tpl linguist-language=Helm
+*.tgz linguist-detectable=false
+/index.yaml linguist-vendored=true
+/ct.yaml linguist-language=YAML
+/op-scim-bridge/* linguist-detectable=true

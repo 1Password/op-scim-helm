@@ -98,10 +98,10 @@ spec:
             - name: "OP_PORT"
               value: "{{ .Values.scim.httpPort }}"
             - name: "OP_SESSION"
-              {{- if .Values.scim.credentialsVolume }}
+              {{- if .Values.scim.credentialsVolume.enabled }}
               value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.file }}"
               {{- end }}
-              {{- if .Values.scim.credentialsSecret }}
+              {{- if .Values.scim.credentialsSecret.enabled }}
               valueFrom:
                 secretKeyRef:
                   name: {{ tpl .Values.scim.credentialsSecret.name . }}

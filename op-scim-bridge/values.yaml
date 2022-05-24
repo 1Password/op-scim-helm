@@ -51,7 +51,8 @@ scim:
     enabled: false
     className:
     domain:
-    path: \
+    path: /
+    pathType: ImplementationSpecific
     tls:
       enabled: false
       secretName: "{{ .Chart.Name }}-bridge-tls"

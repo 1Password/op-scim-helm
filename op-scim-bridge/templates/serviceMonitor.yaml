@@ -23,4 +23,8 @@ spec:
   endpoints:
   - port: http
     path: /metrics
+    {{- with .Values.scim.serviceMonitor.bearerTokenSecret }}
+    bearerTokenSecret:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
 {{- end }}

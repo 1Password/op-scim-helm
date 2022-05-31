@@ -2,6 +2,35 @@ apiVersion: v1
 entries:
   op-scim:
   - apiVersion: v2
+    appVersion: v2.4.0
+    created: "2022-05-26T21:27:26.865092+01:00"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.0.0
+    description: A Helm chart for deploying the 1Password SCIM bridge
+    digest: 1a7ea84c9aba3afec9ef2034836de223399052167610e19ac1bd3dce65ea4be2
+    home: https://support.1password.com/scim
+    icon: https://1password.com/img/logo-v1.svg
+    keywords:
+    - 1Password
+    - 1Password SCIM bridge
+    - SCIM
+    - automated provisioning
+    - Azure Active Directory
+    - JumpCloud
+    - Okta
+    - OneLogin
+    - Rippling
+    maintainers:
+    - email: support+scim@1password.com
+      name: 1Password Provisioning Team
+    name: op-scim
+    urls:
+    - op-scim-2.4.0.tgz
+    version: 2.4.0
+  - apiVersion: v2
     appVersion: v2.3.1
     created: "2022-02-17T11:20:02.177761-08:00"
     dependencies:
@@ -32,7 +61,7 @@ entries:
     version: 2.3.1
   - apiVersion: v2
     appVersion: v2.3.0
-    created: "2022-02-17T11:20:02.174894-08:00"
+    created: "2021-11-25T16:08:07.927609-08:00"
     description: The 1Password SCIM bridge
     digest: ff6b0824215c142a7f244651fbc8905d98abe5d79947e6d7c1ccf5587bf34d97
     home: https://support.1password.com/scim
@@ -52,7 +81,7 @@ entries:
     version: 2.3.0
   - apiVersion: v2
     appVersion: v2.2.1
-    created: "2022-02-17T11:20:02.174257-08:00"
+    created: "2021-10-20T14:02:37.894943-07:00"
     description: The 1Password SCIM bridge
     digest: 8f025f0e13743f4fb4b3222130ff295c31952d5769121a386356d0528fdc35f1
     home: https://support.1password.com/scim
@@ -72,7 +101,7 @@ entries:
     version: 2.2.1
   - apiVersion: v2
     appVersion: v2.2.0
-    created: "2022-02-17T11:20:02.17385-08:00"
+    created: "2021-10-07T18:57:47.561935+01:00"
     description: The 1Password SCIM bridge
     digest: eaa628e1f5270cd1ddc0b4257fecaedf1460bef1d682f4ebe2e8f758b423cc35
     home: https://support.1password.com/scim
@@ -92,7 +121,7 @@ entries:
     version: 2.2.0
   - apiVersion: v2
     appVersion: v2.1.2
-    created: "2022-02-17T11:20:02.173424-08:00"
+    created: "2021-09-07T17:41:24.624405-06:00"
     description: The 1Password SCIM bridge
     digest: 846a3fa483ba655642deff3c0b73fec6010e03646c27cb3541ce99067d46675b
     home: https://support.1password.com/scim
@@ -112,7 +141,7 @@ entries:
     version: 2.1.2
   - apiVersion: v2
     appVersion: v2.1.0
-    created: "2022-02-17T11:20:02.172643-08:00"
+    created: "2021-07-05T11:47:14.168997-07:00"
     description: The 1Password SCIM bridge
     digest: c70e952256f84c0edfc57e13b2f8a64b751a3c052baadbc2691e4877c3045012
     home: https://support.1password.com/scim
@@ -132,7 +161,7 @@ entries:
     version: 2.1.0
   - apiVersion: v2
     appVersion: v2.0.2
-    created: "2022-02-17T11:20:02.172212-08:00"
+    created: "2021-05-19T16:34:30.750478-04:00"
     description: The 1Password SCIM bridge
     digest: d4a3782e4648f9c2f90c668534c021dcb7060e95e4d9085fb81a2d680c28f0b8
     home: https://support.1password.com/scim
@@ -152,7 +181,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: v2.0.1
-    created: "2022-02-17T11:20:02.171413-08:00"
+    created: "2021-05-07T15:33:22.413061-04:00"
     description: The 1Password SCIM bridge
     digest: dacafc2de88204700abfbeed5f0a59ead89d3648c30925fc6fa483274fbfc184
     home: https://support.1password.com/scim
@@ -172,7 +201,7 @@ entries:
     version: 2.0.1
   - apiVersion: v2
     appVersion: v2.0.0
-    created: "2022-02-17T11:20:02.170983-08:00"
+    created: "2021-04-07T11:04:30.286944-07:00"
     description: The 1Password SCIM bridge
     digest: 70b9cb2f1d93f6138ab4798775175468fc6f80c4f54c49cedc967fddd3eb86e2
     home: https://support.1password.com/scim
@@ -192,7 +221,7 @@ entries:
     version: 2.0.0
   - apiVersion: v2
     appVersion: v1.6.2
-    created: "2022-02-17T11:20:02.170503-08:00"
+    created: "2021-02-08T14:26:45.093769-07:00"
     description: The 1Password SCIM bridge
     digest: 939fcf31f34e0257bd1694b59eaadd431bac87d28d32bfdf89977bc9d3961228
     home: https://support.1password.com/scim
@@ -212,7 +241,7 @@ entries:
     version: 1.6.2
   - apiVersion: v2
     appVersion: v1.6.1
-    created: "2022-02-17T11:20:02.170257-08:00"
+    created: "2020-12-10T09:36:34.823167-08:00"
     description: The 1Password SCIM bridge
     digest: f5c6a69ecffd8b23d99278b75a38b9b7474b0e0eddc1143a87f38fa646827a73
     home: https://support.1password.com/scim
@@ -232,7 +261,7 @@ entries:
     version: 1.6.1
   - apiVersion: v2
     appVersion: v1.6.0
-    created: "2022-02-17T11:20:02.169994-08:00"
+    created: "2020-09-24T17:44:28.061054-07:00"
     description: The 1Password SCIM bridge
     digest: e16b559646084894a837ba84dddadace1671bf5ebedcb76d11454c725fc023fd
     home: https://support.1password.com/scim
@@ -252,7 +281,7 @@ entries:
     version: 1.6.0
   - apiVersion: v2
     appVersion: v1.5.0
-    created: "2022-02-17T11:20:02.169487-08:00"
+    created: "2020-09-02T17:15:28.834386-07:00"
     description: The 1Password SCIM bridge
     digest: 3f8fb2bcfb655bcaa77376a6a31791dc23e74bce259c051d226448dd72ca43cc
     home: https://support.1password.com/scim
@@ -272,7 +301,7 @@ entries:
     version: 1.5.0
   - apiVersion: v2
     appVersion: v1.4.4
-    created: "2022-02-17T11:20:02.169077-08:00"
+    created: "2020-08-06T12:36:42.612607-07:00"
     description: The 1Password SCIM bridge
     digest: 121e462663cf8f502f393ec16cd72af96444c7472d226156166b719fdf0d963f
     home: https://support.1password.com/scim
@@ -292,7 +321,7 @@ entries:
     version: 1.4.4
   - apiVersion: v2
     appVersion: v1.4.3
-    created: "2022-02-17T11:20:02.167529-08:00"
+    created: "2020-08-04T13:28:51.40938037-06:00"
     description: The 1Password SCIM bridge
     digest: 90c47a74ec4c95ab4bb76d3e97d7687ecd0a13b37b277f5b2ecb417d9d51c198
     home: https://support.1password.com/scim
@@ -310,4 +339,4 @@ entries:
     urls:
     - op-scim-1.4.3.tgz
     version: 1.4.3
-generated: "2022-02-17T11:20:02.166214-08:00"
+generated: "2022-05-26T21:27:26.86165+01:00"

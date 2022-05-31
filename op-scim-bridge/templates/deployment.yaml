@@ -35,10 +35,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
-      {{- if .Values.scim.serviceAccount.name }}
+      {{- if .Values.scim.serviceAccount.create }}
+        {{- if .Values.scim.serviceAccount.name }}
       serviceAccountName: {{ .Values.scim.serviceAccount.name }}
-      {{- else }}
+        {{- else }}
       serviceAccountName: {{ tpl .Values.scim.name . }}
+        {{- end }}
       {{- end }}
       {{- with .Values.scim.nodeSelector }}
       nodeSelector:

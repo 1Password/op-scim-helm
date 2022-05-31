@@ -62,7 +62,8 @@ The values are split into two sections:
 | imagePullSecrets | list | `[]` | Image pull secrets. |
 | httpPort | int | `8080` | HTTP port. |
 | httpsPort | int | `8443` | HTTPS port. |
-| serviceType | string | `LoadBalancer` | Service type. |
+| service | object | `{ "enabled": true, "type": "LoadBalancer" }` | Service configuration. |
+| ingress | object | `{}` | Ingress configuration.  |
 | probes | object | `{ "liveness": { "enabled": true, "path": "/ping" } }` | Liveness probe that uses the `GET /ping` endpoint for health checks. |
 | config | object | `{}` | SCIM bridge config options. See [config](#config) for details. |
 | resources | object | `{}` | Resource requests and/or limits for the SCIM bridge pod. |
@@ -74,6 +75,11 @@ The values are split into two sections:
 | affinity | object | `{ "podAntiAffinity": {} }` | Affinity for SCIM bridge pod. By default we configure pod anti-affinity to ensure redis and SCIM bridge pods are not scheduled on the same node. |
 | tolerations | list | `[]` | Tolerations for SCIM bridge pod. |
 | initContainers | object | `{}` | Configuration options for init containers. |
+| replicaCount | int | `1` | Number of replicas in deployment. |
+| autoscaling | object | `{}` | Configuration for `HorizontalPodAutoscaler` resource. Will override `replicaCount` when set. |
+| podDisruptionBudget | object | `{}` | Configuration for `PodDisruptionBudget` resource. Requires more than 1 replica or `autoscaling` to be enabled to be effective. |
+| serviceAccount | object | `{}` | Service account configuration. Default service account is used when disabled. |
+| serviceMonitor | object | `{}` | Service monitor for Prometheus Operator. See [getting started](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/getting-started.md) guide.  |
 
 #### config
 
@@ -124,3 +130,5 @@ This is a small subset of possible the values that you can configure for Redis. 
 | cluster | object | `{"enabled": false }` | Redis cluster is disabled by default. |
 | usePassword | bool | `false` | Use password is disabled by default. |
 | master.affinity | object | `{ "affinity": "podAntiAffinity": {} }` | Master affinity. By default we configure pod anti-affinity to ensure redis and SCIM bridge pods are not scheduled on the same node. Note that this configuration should be duplicated for the slave when not running redis in standalone mode. |
+| master.resources | object | `{}` | Master resource requests and limits. |
+| master.extraFlags | object | `{}` | Master extra flags. By default set a maximum memory limit and define the policy to use when key eviction is required. |

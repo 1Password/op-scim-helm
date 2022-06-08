@@ -56,7 +56,7 @@ The values are split into two sections:
 | name | string | `op-scim-bridge` | SCIM bridge name. |
 | version | string | `major.minor.patch` | SCIM bridge verion. |
 | credentialsVolume | object | `{}` | Use a volume for the SCIM bridge credentials. See [credentialsVolume](#credentialsVolume) for details. |
-| credentialsSecret | object | `{}` | Use a secret for the SCIM bridge credentials. See [credentialsSecret](#credentialsSecret) for details. |
+| credentialsSecrets | object | `{}` | Use a secret for the SCIM bridge credentials. See [credentialsSecrets](#credentialsSecrets) for details. |
 | imageRepository | string | `1password/scim` | 1Password SCIM bridge image. |
 | imagePullPolicy | string | `Always` | Image pull policy. |
 | imagePullSecrets | list | `[]` | Image pull secrets. |
@@ -97,26 +97,25 @@ These values set available SCIM bridge configuation options. For details on the 
 
 #### credentialsVolume
 
-Note that you should configure accessing the SCIM bridge credentials through either the `credentialsVolume` or the `credentialsSecret`, and not both.
+Note that you should configure accessing the SCIM bridge credentials through either the `credentialsVolume` or the `credentialsSecrets`, and not both.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | name | string | `op-scim-bridge-credentials` | Volume name. |
-| file | string | `scimsession` | File name. |
+| files | object | `{ "scimFile": "scimsession", "workspaceSettingsFile": "workspace-settings.json", "workspaceKeyFile":"workspace-credentials.json" }` | File names for SCIM bridge credentials. |
 | accessModes | list | `[ReadWriteOnce]` | Access modes. |
 | resources | object | `{ "requests": { "storage": "1Gi" } }` | The default storage request is `1Gi`. |
-| storageClass | string | unset | Storage class. Set to `"-"` to set value to `""` in resulting application. `do-block-storage` is recommended for Digital Ocean. |
+| storageClass | string | unset | Storage class. Set to `"—"` to set value to `""` in resulting application. `do-block-storage` is recommended for Digital Ocean. |
 
-#### credentialsSecret
+#### credentialsSecrets
 
-Note that you should configure accessing the SCIM bridge credentials through either the `credentialsVolume` or the `credentialsSecret`, and not both.
+Note that you should configure accessing the SCIM bridge credentials through either the `credentialsVolume` or the `credentialsSecrets`, and not both.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| name | string | `op-scim-bridge-credentials` | Secret name. |
-| key | string | `scimsession` | Secret key. |
-| value_json | string | `{}` | JSON contents of the scimsession file. |
-| value_base64 | string | `""` | Base64 encoded contents of the scimsession file. |
+| scimsession | object | `{ “name”:”op-scim-bridge-credentials”, “key”: “scimsession”, “value_json”: “{}”, “value_base64”: “base64 encoded scimsession file” }` | scimsession secret definition. |
+| workspaceSettings | object | `{ “name”:”op-scim-bridge-workspace-settings”, “key”: “workspace-settings”, “value_json”: “{}”, “value_base64”: “base64 encoded workspace settings file” }` | workspace settings secret definition. |
+| workspaceCredentials | object | `{ “name”:”op-scim-bridge-workspace-credentials”, “key”: “workspace-credentials”, “value_json”: “{}”, “value_base64”: “base64 encoded workspace credentials file” }` | workspace credentials secret definition. |
 
 
 ### redis

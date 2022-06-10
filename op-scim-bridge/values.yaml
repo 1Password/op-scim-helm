@@ -5,7 +5,6 @@ scim:
   # version of the SCIM bridge
   version: "{{ .Chart.AppVersion }}"
   # credentialsVolume configures the SCIM bridge to access the credentials via a volume
-  credentialsName: "{{ .Chart.Name }}-bridge-credentials"
   credentialsVolume:
     # name of the file to mount within the volume
     files:

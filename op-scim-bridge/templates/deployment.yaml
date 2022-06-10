@@ -56,7 +56,7 @@ spec:
       {{- end }}
       {{- if .Values.scim.credentialsVolume }}
       volumes:
-        - name: {{ tpl .Values.scim.credentialsName . }}
+        - name: "{{ tpl .Values.scim.name . }}-credentials"
           persistentVolumeClaim:
             claimName: {{ tpl .Values.scim.name . }}-pvc
       {{- end }}
@@ -104,7 +104,7 @@ spec:
               {{- if (.Values.scim.credentialsSecrets).scimsession }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ tpl .Values.scim.credentialsName . }}
+                  name: "{{ tpl .Values.scim.name . }}-credentials"
                   key: {{ .Values.scim.credentialsSecrets.scimsession.key }}
               {{- end }}
             - name: "OP_WORKSPACE_SETTINGS"
@@ -114,7 +114,7 @@ spec:
               {{- if (.Values.scim.credentialsSecrets).workspaceSettings }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ tpl .Values.scim.credentialsName . }}
+                  name: "{{ tpl .Values.scim.name . }}-credentials"
                   key: {{ .Values.scim.credentialsSecrets.workspaceSettings.key }}
               {{- end }}
             - name: "OP_WORKSPACE_CREDENTIALS"
@@ -124,7 +124,7 @@ spec:
               {{- if (.Values.scim.credentialsSecrets).workspaceCredentials }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ tpl .Values.scim.credentialsName . }}
+                  name: "{{ tpl .Values.scim.name . }}-credentials"
                   key: {{ .Values.scim.credentialsSecrets.workspaceCredentials.key }}
               {{- end }}
             - name: "OP_REDIS_URL"

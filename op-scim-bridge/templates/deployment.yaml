@@ -63,7 +63,7 @@ spec:
       {{- if .Values.scim.credentialsVolume }}
       initContainers:
         - name: opuser-home-permissions
-          image: alpine:3.12
+          image: alpine:3.16
           command:
             - "/bin/sh"
             - "-c"

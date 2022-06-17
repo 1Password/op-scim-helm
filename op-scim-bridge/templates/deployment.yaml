@@ -56,14 +56,14 @@ spec:
       {{- end }}
       {{- if .Values.scim.credentialsVolume }}
       volumes:
-        - name: {{ tpl .Values.scim.credentialsVolume.name . }}
+        - name: "{{ tpl .Values.scim.name . }}-credentials"
           persistentVolumeClaim:
             claimName: {{ tpl .Values.scim.name . }}-pvc
       {{- end }}
       {{- if .Values.scim.credentialsVolume }}
       initContainers:
         - name: opuser-home-permissions
-          image: alpine:3.12
+          image: alpine:3.16
           command:
             - "/bin/sh"
             - "-c"
@@ -99,13 +99,33 @@ spec:
               value: "{{ .Values.scim.httpPort }}"
             - name: "OP_SESSION"
               {{- if .Values.scim.credentialsVolume }}
-              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.file }}"
+              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.scimFile }}"
               {{- end }}
-              {{- if .Values.scim.credentialsSecret }}
+              {{- if (.Values.scim.credentialsSecrets).scimsession }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ tpl .Values.scim.credentialsSecret.name . }}
-                  key: {{ .Values.scim.credentialsSecret.key }}
+                  name: "{{ tpl .Values.scim.name . }}-credentials"
+                  key: {{ .Values.scim.credentialsSecrets.scimsession.key }}
+              {{- end }}
+            - name: "OP_WORKSPACE_SETTINGS"
+              {{- if .Values.scim.credentialsVolume }}
+              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.workspaceSettingsFile }}"
+              {{- end }}
+              {{- if (.Values.scim.credentialsSecrets).workspaceSettings }}
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ tpl .Values.scim.name . }}-credentials"
+                  key: {{ .Values.scim.credentialsSecrets.workspaceSettings.key }}
+              {{- end }}
+            - name: "OP_WORKSPACE_CREDENTIALS"
+              {{- if .Values.scim.credentialsVolume }}
+              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.workspaceCredentialsFile }}"
+              {{- end }}
+              {{- if (.Values.scim.credentialsSecrets).workspaceCredentials }}
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ tpl .Values.scim.name . }}-credentials"
+                  key: {{ .Values.scim.credentialsSecrets.workspaceCredentials.key }}
               {{- end }}
             - name: "OP_REDIS_URL"
               value: "{{ tpl .Values.scim.config.redisURL . }}"

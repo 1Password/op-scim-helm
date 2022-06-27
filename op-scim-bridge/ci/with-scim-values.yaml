@@ -1,8 +1,15 @@
 scim:
   credentialsVolume: null
-  credentialsSecret:
-    name: op-scim-bridge-credentials
-    key: scimsession
+  credentialsSecrets:
+    scimsession:
+      key: scimsession
+      value_json: '{}'
+    workspaceSettings:
+      key: workspace-settings
+      value_json: '{}'
+    workspaceCredentials:
+      key: workspace-credentials
+      value_json: '{}'
   service:
     enabled: true
     type: NodePort

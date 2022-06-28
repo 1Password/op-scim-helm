@@ -63,6 +63,7 @@ scim:
   ingress:
     enabled: false
     className: ""
+    annotations: {}
     hosts: []
       # - host: chart-example.local
       #   paths:

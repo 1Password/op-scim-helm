@@ -1,20 +1,32 @@
 # 1Password SCIM bridge Helm Charts
 
-This repository hosts the offical Helm Chart for deploying the 1Password SCIM bridge.
+This is the offical Helm Chart for deploying the 1Password SCIM bridge.
 
-## Installation Guide
+## Installation guide
 
 ### Install Helm
 
 Install the latest version of Helm. See [installing Helm](https://helm.sh/docs/intro/install/) from the official Helm documentation.
 
-### Add Repository
-The following command allows you to download and install the chart from this repository:
+### Add repository
 
-```
-$ helm repo add 1password https://1password.github.io/op-scim-helm
+```shell
+helm repo add 1password  https://1password.github.io/op-scim-helm
+helm repo update
 ```
 
-## Available Charts
+### Install chart
+****
+```shell
+helm install my-release 1password/op-scim-bridge
+```
+
+### Uninstall chart
+
+```shell
+helm uninstall my-release
+```
+
+## Available charts
 
 * [1Password SCIM bridge](./charts/op-scim-bridge/)

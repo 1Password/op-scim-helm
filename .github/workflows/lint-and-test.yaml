@@ -72,7 +72,7 @@ jobs:
           acceptanceTests:
             enabled: true
           EOF
-          for values_file in op-scim-bridge/ci/*.yaml; do
+          for values_file in charts/op-scim-bridge/ci/*.yaml; do
             # Add secrets
             yq eval '.scim.credentialsSecret.value_base64 = strenv(OP_SESSION) | .scim.credentialsSecret.token = strenv(OP_TOKEN)' -i $values_file
             # Add acceptance test fixtures

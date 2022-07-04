@@ -1,4 +1,4 @@
-# 1Password SCIM bridge Helm Charts
+# 1Password SCIM bridge Helm Chart
 
 This is the offical Helm Chart for deploying the 1Password SCIM bridge.
 
@@ -16,7 +16,7 @@ helm repo update
 ```
 
 ### Install chart
-****
+
 ```shell
 helm install my-release 1password/op-scim-bridge
 ```

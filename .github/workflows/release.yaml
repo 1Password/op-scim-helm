@@ -19,10 +19,16 @@ jobs:
           # Authenticate as the GitHub Actions bot https://api.github.com/users/github-actions%5Bbot%5D
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
       - name: Install Helm
         uses: azure/setup-helm@v1
         with:
           version: v3.4.1
+
+      - name: Add Helm Chart dependencies
+        run: |
+          # Add redis (used by op-scim)
+          helm repo add bitnami https://charts.bitnami.com/bitnami
 
       - name: Run chart-releaser
         # Fork of helm/chart-releaser-action to avoid unwanted release attempts.

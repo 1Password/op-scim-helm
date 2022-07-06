@@ -11,7 +11,7 @@ Install the latest version of Helm. See [installing Helm](https://helm.sh/docs/i
 ### Add repository
 
 ```shell
-helm repo add 1password  https://1password.github.io/op-scim-helm
+helm repo add 1password https://1password.github.io/op-scim-helm
 helm repo update
 ```
 

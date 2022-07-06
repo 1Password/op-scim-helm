@@ -190,7 +190,9 @@ redis:
       limits:
         cpu: 250m
         memory: 512M
-    extraFlags: ["--maxmemory", "256mb", "--maxmemory-policy", "volatile-lru"]
+    extraFlags:
+      - "--maxmemory 256mb"
+      - "--maxmemory-policy volatile-lru"
 
 # acceptanceTests is used by the tests run during CI (see templates/tests)
 acceptanceTests:

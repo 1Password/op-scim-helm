@@ -178,6 +178,7 @@ redis:
   # prefer to schedule redis and SCIM bridge pods on separate nodes
   # this configuration should be duplicated for replica.affinity when not running redis as a standalone instance
   master:
+    kind: Deployment
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:

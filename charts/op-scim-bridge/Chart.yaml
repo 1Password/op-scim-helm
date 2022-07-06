@@ -20,6 +20,6 @@ icon: https://1password.com/img/logo-v1.svg
 appVersion: v2.4.1
 dependencies:
   - name: redis
-    version: 16.12.0
+    version: ~16
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled

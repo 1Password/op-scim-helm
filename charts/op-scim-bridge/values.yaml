@@ -162,9 +162,11 @@ scim:
     resources: {}
 # redis configuration options (see upstream chart documentation and README.MD)
 redis:
+  enabled: true
+  auth:
+    enabled: false
   # this can be changed to "replication" if you wish to have more redis nodes; see bitnami chart documentation
   architecture: standalone
-  enabled: true
   image:
     registry: docker.io
     repository: bitnami/redis

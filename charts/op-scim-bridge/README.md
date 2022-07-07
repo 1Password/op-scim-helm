@@ -34,7 +34,7 @@ helm repo update
 ### Install chart
 
 ```shell
-helm install my-release 1password/op-scim-bridge
+helm install my-release 1password/op-scim
 ```
 
 ### Uninstall chart

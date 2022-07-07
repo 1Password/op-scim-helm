@@ -175,10 +175,14 @@ redis:
   cluster:
     enabled: false
   usePassword: false
-  # prefer to schedule redis and SCIM bridge pods on separate nodes
-  # this configuration should be duplicated for replica.affinity when not running redis as a standalone instance
+  # redis config options applied to all instances in the configuration
+  commonConfiguration: |-
+    maxmemory 256mb
+    maxmemory-policy volatile-lru
   master:
     kind: Deployment
+    # prefer to schedule redis and SCIM bridge pods on separate nodes
+    # this configuration should be duplicated for replica.affinity when not running redis as a standalone instance
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -193,7 +197,6 @@ redis:
       limits:
         cpu: 250m
         memory: 512M
-    extraFlags: ["--maxmemory", "256mb", "--maxmemory-policy", "volatile-lru"]
 
 # acceptanceTests is used by the tests run during CI (see templates/tests)
 acceptanceTests:

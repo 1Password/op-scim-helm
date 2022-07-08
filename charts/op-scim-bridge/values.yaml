@@ -119,11 +119,16 @@ scim:
   # affinity sets the affinity for the SCIM bridge pod
   affinity:
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app: redis
-          topologyKey: topology.kubernetes.io/zone
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - redis
+          topologyKey: "kubernetes.io/hostname"
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
   # replicaCount sets number of replicas to deploy
@@ -162,9 +167,11 @@ scim:
     resources: {}
 # redis configuration options (see upstream chart documentation and README.MD)
 redis:
+  enabled: true
+  auth:
+    enabled: false
   # this can be changed to "replication" if you wish to have more redis nodes; see bitnami chart documentation
   architecture: standalone
-  enabled: true
   image:
     registry: docker.io
     repository: bitnami/redis
@@ -173,16 +180,26 @@ redis:
   cluster:
     enabled: false
   usePassword: false
-  # prefer to schedule redis and SCIM bridge pods on separate nodes
-  # this configuration should be duplicated for replica.affinity when not running redis as a standalone instance
+  # redis config options applied to all instances in the configuration
+  commonConfiguration: |-
+    maxmemory 256mb
+    maxmemory-policy volatile-lru
   master:
+    kind: Deployment
+    # prefer to schedule redis and SCIM bridge pods on separate nodes
+    # this configuration should be duplicated for replica.affinity when not running redis as a standalone instance
     affinity:
       podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels:
-                app: op-scim-bridge
-            topologyKey: topology.kubernetes.io/zone
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - op-scim-bridge
+            topologyKey: "kubernetes.io/hostname"
     resources:
       requests:
         cpu: 125m
@@ -190,7 +207,6 @@ redis:
       limits:
         cpu: 250m
         memory: 512M
-    extraFlags: ["--maxmemory", "256mb", "--maxmemory-policy", "volatile-lru"]
 
 # acceptanceTests is used by the tests run during CI (see templates/tests)
 acceptanceTests:

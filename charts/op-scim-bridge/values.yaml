@@ -1,7 +1,7 @@
 # scim configuration options
 scim:
   # name sets the name used for the various constructs used by the SCIM bridge setup
-  name: "{{ .Chart.Name }}-bridge"
+  name: "{{ .Chart.Name }}"
   # version of the SCIM bridge
   version: "{{ .Chart.AppVersion }}"
   # credentialsVolume configures the SCIM bridge to access the credentials via a volume
@@ -84,7 +84,7 @@ scim:
   # config sets the configuration options
   config:
     # redisURL sets the Redis connection URL
-    redisURL: "redis://{{ .Chart.Name }}-bridge-redis-master:6379"
+    redisURL: "redis://{{ .Chart.Name }}-redis-master:6379"
     # domain sets the allowed 1Password sign in URL. Not set by default.
     # domain: example.1password.com
     # letsEncryptDomain sets the domain to attempt to get a certificate for via Let's Encrypt.
@@ -97,7 +97,7 @@ scim:
     # prettyLogs: false
   tls:
     enabled: false
-    secret: "{{ .Chart.Name }}-bridge-tls"
+    secret: "{{ .Chart.Name }}-tls"
   # resource sets the requests and/or limits for the SCIM bridge pod
   resources:
     requests:

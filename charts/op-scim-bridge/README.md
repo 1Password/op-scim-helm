@@ -27,7 +27,7 @@ You will need Helm installed to use this chart. Get the latest [Helm](https://gi
 ### Add repository
 
 ```shell
-helm repo add 1password https://raw.githubusercontent.com/1password/op-scim-helm/main
+helm repo add 1password https://1password.github.io/op-scim-helm
 helm repo update
 ```
 

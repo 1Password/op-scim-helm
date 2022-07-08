@@ -119,11 +119,16 @@ scim:
   # affinity sets the affinity for the SCIM bridge pod
   affinity:
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app: redis
-          topologyKey: topology.kubernetes.io/zone
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - redis
+          topologyKey: "kubernetes.io/hostname"
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
   # replicaCount sets number of replicas to deploy
@@ -185,11 +190,16 @@ redis:
     # this configuration should be duplicated for replica.affinity when not running redis as a standalone instance
     affinity:
       podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels:
-                app: op-scim-bridge
-            topologyKey: topology.kubernetes.io/zone
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - op-scim-bridge
+            topologyKey: "kubernetes.io/hostname"
     resources:
       requests:
         cpu: 125m

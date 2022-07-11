@@ -1,5 +1,5 @@
-# This file is not needed anymore and will be removed soon.
-# It only still exists in this place to print an error message to users who still use the old repo URL.
-# For the actual index.yaml file, see https://github.com/1Password/op-scim-helm/blob/gh-pages/index.yaml.
+# This file is no longer required and will be removed soon.
+# It exists only to print an error message to users who still use the old repo URL.
+# For the new index.yaml file, see https://github.com/1Password/op-scim-helm/blob/gh-pages/index.yaml.
 apiVersion: v1
-"The https://raw.githubusercontent.com/1password/op-scim-helm/main URL is not supported anymore, please switch to https://1password.github.io/op-scim-helm":
+"The https://raw.githubusercontent.com/1password/op-scim-helm/main URL is no longer supported, please switch to https://1password.github.io/op-scim-helm/":

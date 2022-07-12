@@ -8,7 +8,7 @@ scim:
   credentialsVolume:
     # name of the file to mount within the volume
     files:
-      scimFile: scimsession
+      scimsessionFile: scimsession
       workspaceSettingsFile: workspace-settings.json
       workspaceCredentialsFile: workspace-credentials.json
     # accessModes for the volume
@@ -64,12 +64,14 @@ scim:
     enabled: false
     className: ""
     annotations: {}
-    hosts: []
+    hosts:
+      []
       # - host: chart-example.local
       #   paths:
       #     - path: /
       #       pathType: ImplementationSpecific
-    tls: []
+    tls:
+      []
       #  - secretName: chart-example-tls
       #    hosts:
       #      - chart-example.local
@@ -120,15 +122,15 @@ scim:
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 100
-        podAffinityTerm:
-          labelSelector:
-            matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - redis
-          topologyKey: "kubernetes.io/hostname"
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - redis
+            topologyKey: "kubernetes.io/hostname"
   # tolerations sets the tolerations for the SCIM bridge pod
   tolerations: []
   # replicaCount sets number of replicas to deploy
@@ -191,15 +193,15 @@ redis:
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - op-scim-bridge
-            topologyKey: "kubernetes.io/hostname"
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - op-scim-bridge
+              topologyKey: "kubernetes.io/hostname"
     resources:
       requests:
         cpu: 125m

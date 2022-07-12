@@ -10,7 +10,7 @@ scim:
     files:
       scimFile: scimsession
       workspaceSettingsFile: workspace-settings.json
-      workspaceKeyFile: workspace-credentials.json
+      workspaceCredentialsFile: workspace-credentials.json
     # accessModes for the volume
     accessModes:
       - ReadWriteOnce

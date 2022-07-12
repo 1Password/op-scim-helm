@@ -99,7 +99,7 @@ spec:
               value: "{{ .Values.scim.httpPort }}"
             - name: "OP_SESSION"
               {{- if .Values.scim.credentialsVolume }}
-              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.scimFile }}"
+              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.scimsessionFile }}"
               {{- end }}
               {{- if (.Values.scim.credentialsSecrets).scimsession }}
               valueFrom:

@@ -27,7 +27,7 @@ jobs:
 
       - name: Add Helm Chart dependencies
         run: |
-          # Add redis (used by op-scim)
+          # Add redis (used by op-scim-bridge)
           helm repo add bitnami https://charts.bitnami.com/bitnami
 
       - name: Run chart-releaser

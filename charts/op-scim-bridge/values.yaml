@@ -1,7 +1,7 @@
 # scim configuration options
 scim:
   # name sets the name used for the various constructs used by the SCIM bridge setup
-  name: "{{ .Release.Name }}"
+  name: '{{ template "common.names.fullname" . }}'
   # version of the SCIM bridge
   version: "{{ .Chart.AppVersion }}"
   # credentialsVolume configures the SCIM bridge to access the credentials via a volume

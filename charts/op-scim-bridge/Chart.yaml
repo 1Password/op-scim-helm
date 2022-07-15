@@ -1,6 +1,6 @@
 apiVersion: v2
 name: op-scim-bridge
-version: 2.5.0
+version: 2.5.1
 description: A Helm chart for deploying the 1Password SCIM bridge
 keywords:
   - "1Password"
@@ -23,3 +23,6 @@ dependencies:
     version: ~16
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled
+  - name: common
+    version: ~1
+    repository: https://charts.bitnami.com/bitnami

@@ -1,5 +1,7 @@
 ## How to contribute
 
+Thank you for taking the time to contribute to the Helm chart for the 1Password SCIM bridge.
+
 #### **Did you find a bug?**
 
 * Do not open up a GitHub issue if the bug is an issue with the 1Password SCIM bridge or functionality related to automated provisioning, and instead reach out to the our [support team](https://support.1password.com/contact/) directly.

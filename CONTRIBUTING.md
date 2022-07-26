@@ -4,9 +4,9 @@ Thank you for taking the time to contribute to the Helm chart for the 1Password 
 
 #### **Did you find a bug?**
 
-* Do not open up a GitHub issue if the bug is an issue with the 1Password SCIM bridge or functionality related to automated provisioning, and instead reach out to the our [support team](https://support.1password.com/contact/) directly.
+* If the bug an issue with the 1Password SCIM bridge or functionality related to automated provisioning in 1Password, do not open up a GitHub issue. Instead reach out to the our [support team](https://support.1password.com/contact/) directly.
 
-* Ensure the bug was not already reported by searching on GitHub under [Issues](https://github.com/1Password/op-scim-helm/issues).
+* Search if the bug has already been reported by searching on GitHub under [Issues](https://github.com/1Password/op-scim-helm/issues). Comment on any existing issues with your context to help us resolve the issue.
 
 * If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/1Password/op-scim-helm/issues/new). Be sure to include a title and clear description, as much relevant information as possible, and steps that demonstrate the expected behavior that is not occurring.
 
@@ -18,7 +18,7 @@ Thank you for taking the time to contribute to the Helm chart for the 1Password 
 
 #### **Did you fix whitespace, formatting, or make a purely cosmetic patch?**
 
-Changes that are cosmetic in nature and do not add anything substantial to the stability, functionality, or testability of this project will generally not be accepted.
+Changes that are cosmetic in nature and do not add anything substantial to the stability, functionality, or testability of this project will be rejected.
 
 #### **Do you intend to add a new feature or change an existing one?**
 
@@ -38,4 +38,4 @@ Changes that are cosmetic in nature and do not add anything substantial to the s
 
 Thanks! :heart:
 
-Provisioning Team @ [1Password](https://1password.com)
+The Provisioning Team @ [1Password](https://1password.com)

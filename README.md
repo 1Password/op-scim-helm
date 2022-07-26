@@ -2,6 +2,8 @@
 
 This is the offical Helm chart for deploying the 1Password SCIM bridge.
 
+The chart exists to facilitate our one-click deployment options for the [Google Cloud Marketplace](https://console.cloud.google.com/marketplace/product/agilebits-public/op-scim-bridge) and [DigitalOcean Marketplace](https://marketplace.digitalocean.com/apps/1password-scim-bridge) applications. With this in mind the chart is tailored to our specific use case and will likely not meet the requirements of every configuration option or deployment scenario. For more general purpose deployment options please see our [1Password/scim-examples](https://github.com/1Password/scim-examples) repository.
+
 ## Installation guide
 
 ### Install Helm

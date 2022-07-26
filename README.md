@@ -1,6 +1,6 @@
-# 1Password SCIM bridge Helm Chart
+# 1Password SCIM bridge Helm chart
 
-This is the offical Helm Chart for deploying the 1Password SCIM bridge.
+This is the offical Helm chart for deploying the 1Password SCIM bridge.
 
 ## Installation guide
 

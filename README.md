@@ -29,4 +29,4 @@ helm uninstall my-release
 
 ## Available charts
 
-* [1Password SCIM bridge](https://github.com/1Password/op-scim-helm/tree/main/op-scim-bridge)
+* [1Password SCIM bridge](https://github.com/1Password/op-scim-helm/tree/main/charts/op-scim-bridge)

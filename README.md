@@ -32,3 +32,35 @@ helm uninstall my-release
 ## Available charts
 
 * [1Password SCIM bridge](https://github.com/1Password/op-scim-helm/tree/main/charts/op-scim-bridge)
+
+## Resource Recommendations
+
+The default resource recommendations for the SCIM bridge and Redis deployments are acceptable in most scenarios, but they fall short in high volume deployments. 
+
+Our current default resource requirements (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L104)) are:
+
+```yaml
+requested:
+  cpu: 125m
+  memory: 256M
+
+limits:
+  cpu: 250m
+  memory: 512M
+```
+
+Proposed recommendations for high volume deployments:
+
+```yaml
+requested:
+  cpu: 0.5 (500m)
+  memory: 512M
+
+limits:
+  cpu: 1 (1000m)
+  memory: 1024M
+```
+
+This is 4x the CPU, and 2x the memory.
+
+Please reach out to our support team if you need help with the configuration or to tweak the values for your deployment.

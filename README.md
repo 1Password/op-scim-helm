@@ -35,7 +35,7 @@ helm uninstall my-release
 
 ## Resource Recommendations
 
-The default resource recommendations for the SCIM bridge and Redis deployments are acceptable in most scenarios, but they fall short in high volume deployments. 
+The default resource recommendations for the SCIM bridge and Redis deployments are acceptable in most scenarios, but they fall short in high volume deployments where there is a large number of users and/or groups. 
 
 Our current default resource requirements (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L104)) are:
 

@@ -63,4 +63,38 @@ limits:
 
 This proposal is 4x the CPU and 2x the memory of the default values.
 
+### Updating resources
+
+Updating the default values is a two-step process:
+
+1. Create a new file named `override.yaml` in the root directory of the `op-scim-helm` project, and copy the below content in this new file. We have provided the proposed recommendations for you.
+
+```yaml
+# scim configuration options
+scim:
+  # resource sets the requests and/or limits for the SCIM bridge pod
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512M
+    limits:
+      cpu: 1000m
+      memory: 1024M
+```
+2. Upgrade the `op-scim-bridge` chart with the updated `override.yaml` values:
+
+```
+helm upgrade -f override.yaml op-scim-bridge 1password/op-scim-bridge
+```
+
+If successful, you should see the message `Release "op-scim-bridge" has been upgraded. Happy Helming!`
+
+You can verify the changes by describing the deployment with `kubectl` and referencing the Limits and Requests sections of the `op-scim-bridge` container:
+
+```
+kubectl describe deploy op-scim-bridge
+```
+
+For further understanding of how Kubernetes measures resources, please see [Resource units in Kubernetes](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes)
+
 Please reach out to our [support team](https://support.1password.com/contact/) if you need help with the configuration or to tweak the values for your deployment.

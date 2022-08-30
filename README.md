@@ -61,6 +61,6 @@ limits:
   memory: 1024M
 ```
 
-This is 4x the CPU, and 2x the memory.
+This proposal is 4x the CPU and 2x the memory of the default values.
 
 Please reach out to our [support team](https://support.1password.com/contact/) if you need help with the configuration or to tweak the values for your deployment.

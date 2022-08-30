@@ -32,3 +32,69 @@ helm uninstall my-release
 ## Available charts
 
 * [1Password SCIM bridge](https://github.com/1Password/op-scim-helm/tree/main/charts/op-scim-bridge)
+
+## Resource Recommendations
+
+The default resource recommendations for the SCIM bridge and Redis deployments are acceptable in most scenarios, but they fall short in high volume deployments where there is a large number of users and/or groups. 
+
+Our current default resource requirements (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L104)) are:
+
+```yaml
+requested:
+  cpu: 125m
+  memory: 256M
+
+limits:
+  cpu: 250m
+  memory: 512M
+```
+
+Proposed recommendations for high volume deployments:
+
+```yaml
+requested:
+  cpu: 0.5 (500m)
+  memory: 512M
+
+limits:
+  cpu: 1 (1000m)
+  memory: 1024M
+```
+
+This proposal is 4x the CPU and 2x the memory of the default values.
+
+### Updating resources
+
+Updating the default values is a two-step process:
+
+1. Create a new file named `override.yaml` in the root directory of the `op-scim-helm` project, and copy the below content in this new file. We have provided the proposed recommendations for you.
+
+```yaml
+# scim configuration options
+scim:
+  # resource sets the requests and/or limits for the SCIM bridge pod
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512M
+    limits:
+      cpu: 1000m
+      memory: 1024M
+```
+2. Upgrade the `op-scim-bridge` chart with the updated `override.yaml` values:
+
+```
+helm upgrade -f override.yaml op-scim-bridge 1password/op-scim-bridge
+```
+
+If successful, you should see the message `Release "op-scim-bridge" has been upgraded. Happy Helming!`
+
+You can verify the changes by describing the deployment with `kubectl` and referencing the Limits and Requests sections of the `op-scim-bridge` container:
+
+```
+kubectl describe deploy op-scim-bridge
+```
+
+For further understanding of how Kubernetes measures resources, please see [Resource units in Kubernetes](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes)
+
+Please reach out to our [support team](https://support.1password.com/contact/) if you need help with the configuration or to tweak the values for your deployment.

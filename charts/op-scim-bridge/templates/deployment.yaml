@@ -68,7 +68,7 @@ spec:
             - "/bin/sh"
             - "-c"
           args:
-            - "mkdir -p /home/opuser/.op && chown -R 999 /home/opuser && chmod -R 700 /home/opuser"
+            - "mkdir -p /home/opuser/.op && chown -R 999 /home/opuser && chmod -R 700 /home/opuser && umask 177 /home/opuser/.op"
           volumeMounts:
             - mountPath: /home/opuser/.op
               name: {{ tpl .Values.scim.name . }}-credentials

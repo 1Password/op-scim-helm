@@ -37,59 +37,33 @@ helm uninstall my-release
 
 The default resource recommendations for the SCIM bridge and Redis deployments are acceptable in most scenarios, but they fall short in high volume deployments where there is a large number of users and/or groups. 
 
-Our current default resource requirements for the SCIM bridge (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L104)) are:
+We strongly recommend increasing both the SCIM bridge and Redis deployments.
+
+Our current default resource requirements for the SCIM bridge (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L104)) and Redis (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L205)) are:
 
 ```yaml
 requests:
-  cpu: 250m
-  memory: 512M
+  cpu: 125m
+  memory: 256M
 
 limits:
-  cpu: 500m
-  memory: 1024M
+  cpu: 250m
+  memory: 512M
 ```
 
 Proposed recommendations for high volume deployments:
 
 ```yaml
 requests:
-  cpu: 1 (1000m)
-  memory: 1024M
-
-limits:
-  cpu: 2 (2000m)
-  memory: 2048M
-```
-
-This proposal is 4x the CPU and 2x the memory of the default values.
-
----
-
-Our current default resource requirements for the Redis container (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L205)) are:
-
-```yaml
-requests:
-  cpu: 250m
+  cpu: 500m
   memory: 512M
 
 limits:
-  cpu: 500m
+  cpu: 1000m
   memory: 1024M
 ```
 
-Proposed recommendations for high volume deployments:
-
-```yaml
-requests:
-  cpu: 1 (1000m)
-  memory: 1024M
-
-limits:
-  cpu: 2 (2000m)
-  memory: 2048M
-```
-
-This proposal is 4x the CPU and 2x the memory of the default values.
+This proposal is 4x the CPU and 2x the memory of the default values. These values can be scaled down again after the high volume deployment.
 
 ### Updating resources
 
@@ -103,13 +77,13 @@ scim:
   # resource sets the requests and/or limits for the SCIM bridge pod
   resources:
     requests:
-      cpu: 1 (1000m)
-      memory: 1024M
+      cpu: 500m
+      memory: 512M
     limits:
-      cpu: 2 (2000m)
-      memory: 2048M
+      cpu: 1000m
+      memory: 1024M
 # Redis configuration options
-redis:
+redis:  
   # resource sets the requests and/or limits for the Redis pod
   resources:
     requests:

@@ -83,15 +83,15 @@ scim:
       cpu: 1000m
       memory: 1024M
 # Redis configuration options
-redis:  
+redis:
   # resource sets the requests and/or limits for the Redis pod
-  resources:
-    requests:
-      cpu: 250m
-      memory: 512M
-    limits:
-      cpu: 500m
-      memory: 1024M
+  requests:
+    cpu: 500m
+    memory: 512M
+
+  limits:
+    cpu: 1000m
+    memory: 1024M
 ```
 2. Upgrade the `op-scim-bridge` chart with the updated `override.yaml` values:
 

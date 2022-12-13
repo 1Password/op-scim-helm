@@ -106,8 +106,8 @@ scim:
       cpu: 250m
       memory: 512M
     limits:
-      cpu: 500m
-      memory: 1024M
+      cpu: 250m
+      memory: 512M
   # annotations adds additional annotations
   annotations: {}
   # labels adds additional labels

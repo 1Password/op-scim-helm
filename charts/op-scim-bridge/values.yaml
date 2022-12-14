@@ -103,8 +103,8 @@ scim:
   # resource sets the requests and/or limits for the SCIM bridge pod
   resources:
     requests:
-      cpu: 250m
-      memory: 512M
+      cpu: 125m
+      memory: 256M
     limits:
       cpu: 250m
       memory: 512M

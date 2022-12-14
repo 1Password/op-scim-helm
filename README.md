@@ -37,10 +37,12 @@ helm uninstall my-release
 
 The default resource recommendations for the SCIM bridge and Redis deployments are acceptable in most scenarios, but they fall short in high volume deployments where there is a large number of users and/or groups. 
 
-Our current default resource requirements (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L104)) are:
+We strongly recommend increasing both the SCIM bridge and Redis deployments.
+
+Our current default resource requirements for the SCIM bridge (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L104)) and Redis (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L205)) are:
 
 ```yaml
-requested:
+requests:
   cpu: 125m
   memory: 256M
 
@@ -52,16 +54,16 @@ limits:
 Proposed recommendations for high volume deployments:
 
 ```yaml
-requested:
-  cpu: 0.5 (500m)
+requests:
+  cpu: 500m
   memory: 512M
 
 limits:
-  cpu: 1 (1000m)
+  cpu: 1000m
   memory: 1024M
 ```
 
-This proposal is 4x the CPU and 2x the memory of the default values.
+This proposal is 4x the CPU and 2x the memory of the default values. These values can be scaled down again after the high volume deployment.
 
 ### Updating resources
 
@@ -70,7 +72,7 @@ Updating the default values is a two-step process:
 1. Create a new file named `override.yaml` in the root directory of the `op-scim-helm` project, and copy the below content in this new file. We have provided the proposed recommendations for you.
 
 ```yaml
-# scim configuration options
+# SCIM configuration options
 scim:
   # resource sets the requests and/or limits for the SCIM bridge pod
   resources:
@@ -80,10 +82,20 @@ scim:
     limits:
       cpu: 1000m
       memory: 1024M
+# Redis configuration options
+redis:
+  # resource sets the requests and/or limits for the Redis pod
+  requests:
+    cpu: 500m
+    memory: 512M
+
+  limits:
+    cpu: 1000m
+    memory: 1024M
 ```
 2. Upgrade the `op-scim-bridge` chart with the updated `override.yaml` values:
 
-```
+```shell
 helm upgrade -f override.yaml op-scim-bridge 1password/op-scim-bridge
 ```
 
@@ -91,7 +103,7 @@ If successful, you should see the message `Release "op-scim-bridge" has been upg
 
 You can verify the changes by describing the deployment with `kubectl` and referencing the Limits and Requests sections of the `op-scim-bridge` container:
 
-```
+```shell
 kubectl describe deploy op-scim-bridge
 ```
 

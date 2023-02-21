@@ -41,6 +41,14 @@ We strongly recommend increasing both the SCIM bridge and Redis deployments.
 
 Our current default resource requirements for the SCIM bridge (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L104)) and Redis (defined in [values.yaml](https://github.com/1Password/op-scim-helm/blob/main/charts/op-scim-bridge/values.yaml#L205)) are:
 
+| Expected Provisioned Users | Resources |
+| ---- | ---- |
+| 1-100  | default  |
+| 100-2000  | high volume deployment  |
+| 2000+  | very high volume deployment  |
+
+
+**Default**
 ```yaml
 requests:
   cpu: 125m
@@ -51,8 +59,7 @@ limits:
   memory: 512M
 ```
 
-Proposed recommendations for high volume deployments:
-
+**High Deployment**
 ```yaml
 requests:
   cpu: 500m
@@ -61,6 +68,17 @@ requests:
 limits:
   cpu: 1000m
   memory: 1024M
+```
+
+**Very High Deployment**
+```yaml
+requests:
+  cpu: 1000m
+  memory: 1024M
+
+limits:
+  cpu: 2000m
+  memory: 2048M
 ```
 
 This proposal is 4x the CPU and 2x the memory of the default values. These values can be scaled down again after the high volume deployment.

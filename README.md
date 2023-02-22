@@ -66,8 +66,7 @@ These values can be scaled down again after the high volume deployment.
 
 <details>
   <summary>High Deployment</summary>
-      
-      ```yaml
+    <pre>
       requests:
         cpu: 500m
         memory: 512M
@@ -75,8 +74,7 @@ These values can be scaled down again after the high volume deployment.
       limits:
         cpu: 1000m
         memory: 1024M
-      ```
-
+  </pre>
 </details>
 
 <details>
@@ -91,7 +89,7 @@ These values can be scaled down again after the high volume deployment.
         cpu: 2000m
         memory: 2048M
       ```
-      
+
 </details>
 
 

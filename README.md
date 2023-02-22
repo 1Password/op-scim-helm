@@ -65,32 +65,31 @@ These values can be scaled down again after the high volume deployment.
 
 <details>
   <summary>High Deployment</summary>
-     ```yaml
-      requests:
-        cpu: 500m
-        memory: 512M
 
-      limits:
-        cpu: 1000m
-        memory: 1024M
-     ```
+  ```yaml
+  requests:
+    cpu: 500m
+    memory: 512M
+
+  limits:
+    cpu: 1000m
+    memory: 1024M
+  ```
 </details>
 
 <details>
   <summary>Very High Deployment</summary>
      
-      ```yaml
-      requests:
-        cpu: 1000m
-        memory: 1024M
+  ```yaml
+  requests:
+    cpu: 1000m
+    memory: 1024M
 
-      limits:
-        cpu: 2000m
-        memory: 2048M
-      ```
-
+  limits:
+    cpu: 2000m
+    memory: 2048M
+  ```
 </details>
-
 
 ### Updating resources
 

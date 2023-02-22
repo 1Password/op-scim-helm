@@ -43,9 +43,9 @@ Our current default resource requirements for the SCIM bridge (defined in [value
 
 | Expected Provisioned Users | Resources |
 | ---- | ---- |
-| 1-100  | default  |
-| 100-2000  | high volume deployment  |
-| 2000+  | very high volume deployment  |
+| 1-100  | Default  |
+| 100-5000  | High Volume Deployment  |
+| 5000+  | Very High Volume Deployment  |
 
 <details>
   <summary>Default</summary>

@@ -49,6 +49,7 @@ Our current default resource requirements for the SCIM bridge (defined in [value
 
 <details>
   <summary>Default</summary>
+     
       ```yaml
       requests:
         cpu: 125m
@@ -58,12 +59,14 @@ Our current default resource requirements for the SCIM bridge (defined in [value
         cpu: 250m
         memory: 512M
       ```
+
 </details>
 
 These values can be scaled down again after the high volume deployment.
 
 <details>
   <summary>High Deployment</summary>
+      
       ```yaml
       requests:
         cpu: 500m
@@ -73,10 +76,12 @@ These values can be scaled down again after the high volume deployment.
         cpu: 1000m
         memory: 1024M
       ```
+
 </details>
 
 <details>
   <summary>Very High Deployment</summary>
+     
       ```yaml
       requests:
         cpu: 1000m
@@ -86,6 +91,7 @@ These values can be scaled down again after the high volume deployment.
         cpu: 2000m
         memory: 2048M
       ```
+      
 </details>
 
 

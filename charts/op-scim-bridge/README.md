@@ -39,7 +39,7 @@ helm install my-release 1password/op-scim-bridge
 
 ### Uninstall chart
 
-```shel
+```shell
 helm uninstall my-release
 ```
 

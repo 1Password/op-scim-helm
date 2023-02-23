@@ -64,7 +64,7 @@ limits:
 These values can be scaled down again after the high volume deployment.
 
 <details>
-  <summary>High Deployment</summary>
+  <summary>High Volume Deployment</summary>
 
   ```yaml
   requests:
@@ -78,7 +78,7 @@ These values can be scaled down again after the high volume deployment.
 </details>
 
 <details>
-  <summary>Very High Deployment</summary>
+  <summary>Very High Volume Deployment</summary>
      
   ```yaml
   requests:

@@ -89,8 +89,8 @@ scim:
     redisURL: "redis://{{ .Release.Name }}-redis-master:6379"
     # domain sets the allowed 1Password sign in URL. Not set by default.
     # domain: example.1password.com
-    # letsEncryptDomain sets the domain to attempt to get a certificate for via Let's Encrypt.
-    # letsEncryptDomain: scim.example.com
+    # tlsDomain sets the domain to attempt to get a certificate for via Let's Encrypt.
+    # tlsDomain: scim.example.com
     # debug enables DEBUG log level instead of the default INFO level
     # debug: false
     # jsonLogs enables JSON log output

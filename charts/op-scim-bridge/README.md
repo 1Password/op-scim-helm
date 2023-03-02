@@ -97,7 +97,7 @@ These values set available SCIM bridge configuation options. For details on the 
 
 #### credentialsVolume
 
-Note that you should configure accessing the SCIM bridge credentials through either the `credentialsVolume` or the `credentialsSecrets`, and not both.
+Note that you should configure accessing the SCIM bridge credentials through either the `credentialsVolume` or the `credentialsSecrets`, and not both.  If you set `credentialsSecrets`, then `credentialsVolume` will be ignored.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -109,13 +109,33 @@ Note that you should configure accessing the SCIM bridge credentials through eit
 
 #### credentialsSecrets
 
-Note that you should configure accessing the SCIM bridge credentials through either the `credentialsVolume` or the `credentialsSecrets`, and not both.
+Note that you should configure accessing the SCIM bridge credentials through either the `credentialsVolume` or the `credentialsSecrets`, and not both.  If you set `credentialsSecrets`, then `credentialsVolume` will be ignored.
+If `credentialsSecrets` contains `scimsession`, `workspaceSettings`, or `workspaceCredentials`, the `op-scim-bridge` pod will use `SecretKeyRef`s for the `key` in each of those entries.
+If you further specify either `value_json` or `value_base64` in those entries, the `Secret` will be created for you with these keys.  You may omit `value_json` and `value_base64` if you wish to create the secret externally and only reference it here.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | scimsession | object | `{ “name”:”op-scim-bridge-credentials”, “key”: “scimsession”, “value_json”: “{}”, “value_base64”: “base64 encoded scimsession file” }` | scimsession secret definition. |
 | workspaceSettings | object | `{ “name”:”op-scim-bridge-workspace-settings”, “key”: “workspace-settings”, “value_json”: “{}”, “value_base64”: “base64 encoded workspace settings file” }` | workspace settings secret definition. |
 | workspaceCredentials | object | `{ “name”:”op-scim-bridge-workspace-credentials”, “key”: “workspace-credentials”, “value_json”: “{}”, “value_base64”: “base64 encoded workspace credentials file” }` | workspace credentials secret definition. |
+
+
+If you create your own secret, you must name it `{scim.name}-credentials` if `scim.name` is set, otherwise `{helm-release}-credentials`.  You'll encode all the above keys (`scimsession`, `workspace-settings`, `workspace-credentials`) with double-base64-encoded values, e.g.:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: op-scim-bridge-credentials
+type: Opaque
+data:
+  scimsession: >-
+    base64encode(base64encode({contents of scimsession file}))
+  workspace-credentials: >-
+    base64encode(base64encode({contents of google cloud service account JWT}))
+  workspace-settings: >-
+    base64encode(base64encode({"actor":"admin@mydomain.com","bridgeAddress":"https://scimbridge.mydomain.com"}))
+```
 
 
 ### redis

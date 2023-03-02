@@ -1,4 +1,4 @@
-{{- if .Values.scim.credentialsVolume }}
+{{- if and .Values.scim.credentialsVolume (empty .Values.scim.credentialsSecrets) }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

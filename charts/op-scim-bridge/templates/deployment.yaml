@@ -54,13 +54,13 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.scim.credentialsVolume }}
+      {{- if and .Values.scim.credentialsVolume (empty .Values.scim.credentialsSecrets) }}
       volumes:
         - name: "{{ tpl .Values.scim.name . }}-credentials"
           persistentVolumeClaim:
             claimName: {{ tpl .Values.scim.name . }}-pvc
       {{- end }}
-      {{- if .Values.scim.credentialsVolume }}
+      {{- if and .Values.scim.credentialsVolume (empty .Values.scim.credentialsSecrets) }}
       initContainers:
         - name: opuser-home-permissions
           image: alpine:3.16
@@ -98,7 +98,7 @@ spec:
             - name: "OP_PORT"
               value: "{{ .Values.scim.httpPort }}"
             - name: "OP_SESSION"
-              {{- if .Values.scim.credentialsVolume }}
+              {{- if and .Values.scim.credentialsVolume (empty .Values.scim.credentialsSecrets) }}
               value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.scimsessionFile }}"
               {{- end }}
               {{- if (.Values.scim.credentialsSecrets).scimsession }}
@@ -108,7 +108,7 @@ spec:
                   key: {{ .Values.scim.credentialsSecrets.scimsession.key }}
               {{- end }}
             - name: "OP_WORKSPACE_SETTINGS"
-              {{- if .Values.scim.credentialsVolume }}
+              {{- if and .Values.scim.credentialsVolume (empty .Values.scim.credentialsSecrets) }}
               value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.workspaceSettingsFile }}"
               {{- end }}
               {{- if (.Values.scim.credentialsSecrets).workspaceSettings }}
@@ -118,7 +118,7 @@ spec:
                   key: {{ .Values.scim.credentialsSecrets.workspaceSettings.key }}
               {{- end }}
             - name: "OP_WORKSPACE_CREDENTIALS"
-              {{- if .Values.scim.credentialsVolume }}
+              {{- if and .Values.scim.credentialsVolume (empty .Values.scim.credentialsSecrets) }}
               value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.workspaceCredentialsFile }}"
               {{- end }}
               {{- if (.Values.scim.credentialsSecrets).workspaceCredentials }}
@@ -164,7 +164,7 @@ spec:
             periodSeconds: 30
             initialDelaySeconds: 15
           {{- end }}
-          {{- if .Values.scim.credentialsVolume }}
+          {{- if and .Values.scim.credentialsVolume (empty .Values.scim.credentialsSecrets) }}
           volumeMounts:
             - name: {{ tpl .Values.scim.name . }}-credentials
               mountPath: "/home/opuser/.op"

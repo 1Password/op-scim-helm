@@ -1,3 +1,6 @@
+{{- if and .Values.scim.credentials.volume.enabled .Values.scim.credentials.secrets.enabled }}
+{{- fail "scim.credentials.volume.enabled and scim.credentials.secrets.enabled are mutually exclusive." }}
+{{- end }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,13 +57,14 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.scim.credentialsVolume }}
+      {{- if .Values.scim.credentials.volume.enabled }}
       volumes:
-        - name: "{{ tpl .Values.scim.name . }}-credentials"
+        - name: "{{ tpl .Values.scim.credentials.volume.name . }}"
           persistentVolumeClaim:
-            claimName: {{ tpl .Values.scim.name . }}-pvc
+            claimName: "{{ tpl .Values.scim.credentials.volume.claimName . }}"
       {{- end }}
-      {{- if .Values.scim.credentialsVolume }}
+      {{- if .Values.scim.credentials.volume.enabled }}
+      {{- if .Values.scim.credentials.volume.create }}
       initContainers:
         - name: opuser-home-permissions
           image: alpine:3.16
@@ -71,11 +75,12 @@ spec:
             - "mkdir -p /home/opuser/.op && chown -R 999 /home/opuser && chmod -R 700 /home/opuser"
           volumeMounts:
             - mountPath: /home/opuser/.op
-              name: {{ tpl .Values.scim.name . }}-credentials
+              name: "{{ tpl .Values.scim.credentials.volume.name . }}"
           {{- with .Values.scim.initContainers.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+      {{- end }}
       {{- end }}
       containers:
         - name: {{ tpl .Values.scim.name . }}
@@ -98,42 +103,42 @@ spec:
             - name: "OP_PORT"
               value: "{{ .Values.scim.httpPort }}"
             - name: "OP_SESSION"
-              {{- if .Values.scim.credentialsVolume }}
-              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.scimsessionFile }}"
+              {{- if .Values.scim.credentials.volume.enabled }}
+              value: "/home/opuser/.op/{{ .Values.scim.credentials.volume.files.scimsessionFile }}"
               {{- end }}
-              {{- if (.Values.scim.credentialsSecrets).scimsession }}
+              {{- if .Values.scim.credentials.secrets.enabled }}
               valueFrom:
                 secretKeyRef:
-                  name: "{{ tpl .Values.scim.name . }}-credentials"
-                  key: {{ .Values.scim.credentialsSecrets.scimsession.key }}
+                  name: "{{ tpl .Values.scim.credentials.secrets.name . }}"
+                  key: {{ .Values.scim.credentials.secrets.scimsession.key }}
               {{- end }}
             - name: "OP_WORKSPACE_SETTINGS"
-              {{- if .Values.scim.credentialsVolume }}
-              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.workspaceSettingsFile }}"
+              {{- if .Values.scim.credentials.volume.enabled }}
+              value: "/home/opuser/.op/{{ .Values.scim.credentials.volume.files.workspaceSettingsFile }}"
               {{- end }}
-              {{- if (.Values.scim.credentialsSecrets).workspaceSettings }}
+              {{- if .Values.scim.credentials.secrets.enabled }}
               valueFrom:
                 secretKeyRef:
-                  name: "{{ tpl .Values.scim.name . }}-credentials"
-                  key: {{ .Values.scim.credentialsSecrets.workspaceSettings.key }}
+                  name: "{{ tpl .Values.scim.credentials.secrets.name . }}"
+                  key: {{ .Values.scim.credentials.secrets.workspaceSettings.key }}
               {{- end }}
             - name: "OP_WORKSPACE_CREDENTIALS"
-              {{- if .Values.scim.credentialsVolume }}
-              value: "/home/opuser/.op/{{ .Values.scim.credentialsVolume.files.workspaceCredentialsFile }}"
+              {{- if .Values.scim.credentials.volume.enabled }}
+              value: "/home/opuser/.op/{{ .Values.scim.credentials.volume.files.workspaceCredentialsFile }}"
               {{- end }}
-              {{- if (.Values.scim.credentialsSecrets).workspaceCredentials }}
+              {{- if .Values.scim.credentials.secrets.enabled }}
               valueFrom:
                 secretKeyRef:
-                  name: "{{ tpl .Values.scim.name . }}-credentials"
-                  key: {{ .Values.scim.credentialsSecrets.workspaceCredentials.key }}
+                  name: "{{ tpl .Values.scim.credentials.secrets.name . }}"
+                  key: {{ .Values.scim.credentials.secrets.workspaceCredentials.key }}
               {{- end }}
             - name: "OP_REDIS_URL"
               value: "{{ tpl .Values.scim.config.redisURL . }}"
             - name: "OP_PING_SERVER"
               value: "{{ .Values.scim.probes.liveness.enabled }}"
-            {{- if .Values.scim.config.tlsDomain }}
-            - name: "OP_TLS_DOMAIN"
-              value: "{{ .Values.scim.config.tlsDomain }}"
+            {{- if .Values.scim.config.letsEncryptDomain }}
+            - name: "OP_LETSENCRYPT_DOMAIN"
+              value: "{{ .Values.scim.config.letsEncryptDomain }}"
             {{- end }}
             {{- if .Values.scim.config.domain }}
             - name: "OP_DOMAIN"
@@ -164,9 +169,11 @@ spec:
             periodSeconds: 30
             initialDelaySeconds: 15
           {{- end }}
-          {{- if .Values.scim.credentialsVolume }}
+          {{- if .Values.scim.credentials.volume.enabled }}
+          {{- if .Values.scim.credentials.volume.create }}
           volumeMounts:
-            - name: {{ tpl .Values.scim.name . }}-credentials
+            - name: "{{ tpl .Values.scim.credentials.volume.name . }}"
               mountPath: "/home/opuser/.op"
               readOnly: false
+          {{- end }}
           {{- end }}

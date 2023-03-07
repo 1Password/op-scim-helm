@@ -1,9 +1,5 @@
 {{- if .Values.scim.autoscaling.enabled }}
-{{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: autoscaling/v2
-{{- else }}
 apiVersion: autoscaling/v2beta1
-{{- end }}
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ tpl .Values.scim.name . }}
@@ -25,24 +21,12 @@ spec:
     - type: Resource
       resource:
         name: cpu
-        {{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion }}
-        target:
-          type: Utilization
-          averageUtilization: {{ .Values.scim.autoscaling.targetCPUUtilizationPercentage }}
-        {{- else }}
         targetAverageUtilization: {{ .Values.scim.autoscaling.targetCPUUtilizationPercentage }}
-        {{- end }}
     {{- end }}
     {{- if .Values.scim.autoscaling.targetMemoryUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
-        {{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion -}}
-        target:
-          type: Utilization
-          averageUtilization: {{ .Values.scim.autoscaling.targetMemoryUtilizationPercentage }}
-        {{- else }}
         targetAverageUtilization: {{ .Values.scim.autoscaling.targetMemoryUtilizationPercentage }}
-        {{- end }}
     {{- end }}
 {{- end }}

@@ -4,47 +4,58 @@ scim:
   name: '{{ template "common.names.fullname" . }}'
   # version of the SCIM bridge
   version: "{{ .Chart.AppVersion }}"
-  # credentialsVolume configures the SCIM bridge to access the credentials via a volume
-  credentialsVolume:
-    # name of the file to mount within the volume
-    files:
-      scimsessionFile: scimsession
-      workspaceSettingsFile: workspace-settings.json
-      workspaceCredentialsFile: workspace-credentials.json
-    # accessModes for the volume
-    accessModes:
-      - ReadWriteOnce
-    # resources configuration for the volume
-    resources:
-      requests:
-        storage: 1Gi
-    # storageClass for the volume. do-block-storage is recommended for Digital Ocean. Set to "-" to set storageClass to "".
-    # storageClass:
-  # credentialsSecrets configures the SCIM bridge to access the credentials via a secret
-  # TODO: make an "enabled" flag so these sections can both be uncommented
-  credentialsSecrets:
-    # scimsession:
-    #   # name of the secret
-    #   # key of the secret
-    #   key: scimsession
-    #   # value_json is the JSON contents of the scimsession file
-    #   value_json: "{}"
-    #   # value_base64 is the base64 encoded contents of the scimsession file
-    #   # value_base64: "base64 encoded scimsession file"
-    # workspaceSettings:
-    #   # key of the secret
-    #   key: workspace-settings
-    #   # value_json is the JSON contents of the scimsession file
-    #   value_json: "{}"
-    #   # value_base64 is the base64 encoded contents of the workspace settings file
-    #   # value_base64: "base64 encoded workspace settings file"
-    # workspaceCredentials:
-    #   # key of the secret
-    #   key: workspace-credentials
-    #   # value_json is the JSON contents of the scimsession file
-    #   value_json: "{}"
-    #   # value_base64 is the base64 encoded contents of the workspace key file
-    #   # value_base64: "base64 encoded workspace key file"
+  # configure the credentials used by the SCIM bridge
+  credentials:
+    volume:
+      # setting enabled:true configures the SCIM bridge to access the credentials via a volume
+      enabled: false
+      # create the volume if it does not exist
+      create: true
+      # name of an existing volume to use for the credentials
+      name: '{{ template "common.names.fullname" . }}-credentials'
+      claimName: '{{ template "common.names.fullname" . }}-pvc'
+      # name of the file to mount within the volume
+      files:
+        scimsessionFile: scimsession
+        workspaceSettingsFile: workspace-settings.json
+        workspaceCredentialsFile: workspace-credentials.json
+      # accessModes for the volume
+      accessModes:
+        - ReadWriteOnce
+      # resources configuration for the volume
+      resources:
+        requests:
+          storage: 1Gi
+      # storageClass for the volume. do-block-storage is recommended for Digital Ocean. Set to "-" to set storageClass to "".
+      # storageClass:
+    secrets:
+      # setting enabled:true configures the SCIM bridge to access the credentials via a secret
+      enabled: true
+      # create the secret if it does not exist
+      create: false
+      # name of the secret
+      name: '{{ template "common.names.fullname" . }}-credentials'
+      scimsession:
+        # key of the secret
+        key: scimsession
+        # value_json is the JSON contents of the scimsession file
+        # value_json: "{}"
+        # value_base64 is the base64 encoded contents of the scimsession file
+        # value_base64: "base64 encoded scimsession file"
+      workspaceSettings:
+        # key of the secret
+        key: workspace-settings
+        # value_json is the JSON contents of the scimsession file
+        # value_json: "{}"
+        # value_base64 is the base64 encoded contents of the workspace settings file
+        # value_base64: "base64 encoded workspace settings file"
+      workspaceCredentials:
+        # key of the secret
+        key: workspace-credentials
+      #   # value_json is the JSON contents of the scimsession file
+      #   value_json: "{}"
+      #   # value_base64 is the base64 encoded contents of the workspace key file
+      #   # value_base64: "base64 encoded workspace key file"
   # imageRepository sets the 1Password SCIM bridge image to use
   imageRepository: 1password/scim
   # imagePullPolicy sets the image pull policy

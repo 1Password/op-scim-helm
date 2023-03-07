@@ -1,8 +1,8 @@
-{{- if .Values.scim.credentialsVolume }}
+{{- if .Values.scim.credentials.volume.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ tpl .Values.scim.name . }}-pvc
+  name: "{{ tpl .Values.scim.credentials.volume.claimName . }}"
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/application: {{ tpl .Values.scim.name . }}
@@ -14,19 +14,19 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- with .Values.scim.credentialsVolume.accessModes }}
+  {{- with .Values.scim.credentials.volume.accessModes }}
   accessModes:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-  {{- with .Values.scim.credentialsVolume.resources }}
+  {{- with .Values.scim.credentials.volume.resources }}
   resources:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-{{- if .Values.scim.credentialsVolume.storageClass }}
-  {{- if (eq "-" .Values.scim.credentialsVolume.storageClass) }}
+{{- if .Values.scim.credentials.volume.storageClass }}
+  {{- if (eq "-" .Values.scim.credentials.volume.storageClass) }}
   storageClassName: '""'
   {{- else }}
-  storageClassName: "{{ .Values.scim.credentialsVolume.storageClass }}"
+  storageClassName: "{{ .Values.scim.credentials.volume.storageClass }}"
   {{- end }}
 {{- end }}
 {{- end }}

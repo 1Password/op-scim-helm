@@ -39,7 +39,7 @@ helm install my-release 1password/op-scim-bridge
 
 ### Uninstall chart
 
-```shel
+```shell
 helm uninstall my-release
 ```
 
@@ -89,7 +89,7 @@ These values set available SCIM bridge configuation options. For details on the 
 |-----|------|---------|-------------|
 | redisURL | string | `redis://op-scim-bridge-redis-master:6379` | Redis connection URL. |
 | domain | string | unset | Allowed 1Password sign in URL. Not set by default. |
-| letsEncryptDomain | string | unset | Domain to attempt to get a certificate for via Let's Encrypt domain. Not set by default. |
+| tlsDomain | string | unset | Domain to attempt to get a certificate for via Let's Encrypt. Not set by default. |
 | debug | bool | `false` | Enable `DEBUG` log level instead of the default `INFO` level. |
 | jsonLogs | bool | `false` | Enable JSON log output. |
 | prettyLogs | bool | `false` | Enable colorized log output. |

@@ -121,6 +121,7 @@ spec:
                 secretKeyRef:
                   name: "{{ tpl .Values.scim.credentials.secrets.name . }}"
                   key: {{ .Values.scim.credentials.secrets.workspaceSettings.key }}
+                  optional: true
               {{- end }}
             - name: "OP_WORKSPACE_CREDENTIALS"
               {{- if .Values.scim.credentials.volume.enabled }}
@@ -131,6 +132,7 @@ spec:
                 secretKeyRef:
                   name: "{{ tpl .Values.scim.credentials.secrets.name . }}"
                   key: {{ .Values.scim.credentials.secrets.workspaceCredentials.key }}
+                  optional: true
               {{- end }}
             - name: "OP_REDIS_URL"
               value: "{{ tpl .Values.scim.config.redisURL . }}"

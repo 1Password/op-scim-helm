@@ -10,14 +10,14 @@ scim:
       # setting enabled:true configures the SCIM bridge to access the credentials via a volume
       enabled: false
       # create the volume if it does not exist
-      create: true
+      create: false
       # name of an existing volume to use for the credentials
       name: '{{ template "common.names.fullname" . }}-credentials'
       claimName: '{{ template "common.names.fullname" . }}-pvc'
       # name of the file to mount within the volume
       files:
         scimsessionFile: scimsession
-        workspaceSettingsFile: workspace-settings.json
+        workspaceSettingsFile: workspace-settings.json 
         workspaceCredentialsFile: workspace-credentials.json
       # accessModes for the volume
       accessModes:
@@ -32,7 +32,7 @@ scim:
       # setting enabled:true configures the SCIM bridge to access the credentials via a secret
       enabled: true
       # create the secret if it does not exist
-      create: false
+      create: true
       # name of the secret
       name: '{{ template "common.names.fullname" . }}-credentials'
       scimsession:

@@ -43,7 +43,6 @@ scim:
         # value_json is the JSON contents of the scimsession file
         # value_json: "{}"
         # value_base64 is the base64 encoded contents of the scimsession file
-        # value_base64: ""
       workspaceSettings:
         # key of the secret
         key: workspace-settings

@@ -5,7 +5,7 @@ scim:
   # version of the SCIM bridge
   version: "{{ .Chart.AppVersion }}"
   # Set to true if you are using Google Workspace as your identity provider
-  googleWorkspace: false
+  googleWorkspace: true
   # configure the credentials used by the SCIM bridge
   credentials:
     volume:
@@ -43,20 +43,21 @@ scim:
         # value_json is the JSON contents of the scimsession file
         # value_json: "{}"
         # value_base64 is the base64 encoded contents of the scimsession file
+        # value_base64: ""
       workspaceSettings:
         # key of the secret
         key: workspace-settings
         # value_json is the JSON contents of the scimsession file
         # value_json: "{}"
         # value_base64 is the base64 encoded contents of the workspace settings file
-        # value_base64: "base64 encoded workspace settings file"
+        # value_base64: ""
       workspaceCredentials:
         # key of the secret
         key: workspace-credentials
         # value_json is the JSON contents of the scimsession file
         # value_json: "{}"
         # value_base64 is the base64 encoded contents of the workspace key file
-        # value_base64: "base64 encoded workspace key file"
+        # value_base64: ""
   # imageRepository sets the 1Password SCIM bridge image to use
   imageRepository: 1password/scim
   # imagePullPolicy sets the image pull policy

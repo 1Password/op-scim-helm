@@ -15,7 +15,7 @@ scim:
       # name of the file to mount within the volume
       files:
         scimsessionFile: scimsession
-        workspaceSettingsFile: workspace-settings.json 
+        workspaceSettingsFile: workspace-settings.json
         workspaceCredentialsFile: workspace-credentials.json
       # accessModes for the volume
       accessModes:

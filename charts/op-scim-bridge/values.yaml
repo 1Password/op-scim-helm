@@ -4,15 +4,11 @@ scim:
   name: '{{ template "common.names.fullname" . }}'
   # version of the SCIM bridge
   version: "{{ .Chart.AppVersion }}"
-  # Set to true if you are using Google Workspace as your identity provider
-  googleWorkspace: false
   # configure the credentials used by the SCIM bridge
   credentials:
     volume:
       # setting enabled:true configures the SCIM bridge to access the credentials via a volume
       enabled: false
-      # create the volume if it does not exist
-      create: false
       # name of an existing volume to use for the credentials
       name: '{{ template "common.names.fullname" . }}-credentials'
       claimName: '{{ template "common.names.fullname" . }}-pvc'
@@ -31,6 +27,8 @@ scim:
       # storageClass for the volume. do-block-storage is recommended for Digital Ocean. Set to "-" to set storageClass to "".
       # storageClass:
     secrets:
+      # Set to true if you are using Google Workspace as your identity provider
+      googleWorkspace: false
       # setting enabled:true configures the SCIM bridge to access the credentials via a secret
       enabled: true
       # create the secret if it does not exist

@@ -64,7 +64,6 @@ spec:
             claimName: "{{ tpl .Values.scim.credentials.volume.claimName . }}"
       {{- end }}
       {{- if .Values.scim.credentials.volume.enabled }}
-      {{- if .Values.scim.credentials.volume.create }}
       initContainers:
         - name: opuser-home-permissions
           image: alpine:3.16
@@ -80,7 +79,6 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- end }}
       {{- end }}
       containers:
         - name: {{ tpl .Values.scim.name . }}
@@ -172,10 +170,8 @@ spec:
             initialDelaySeconds: 15
           {{- end }}
           {{- if .Values.scim.credentials.volume.enabled }}
-          {{- if .Values.scim.credentials.volume.create }}
           volumeMounts:
             - name: "{{ tpl .Values.scim.credentials.volume.name . }}"
               mountPath: "/home/opuser/.op"
               readOnly: false
-          {{- end }}
           {{- end }}

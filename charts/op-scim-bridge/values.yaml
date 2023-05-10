@@ -45,14 +45,14 @@ scim:
         # key of the secret
         key: workspace-settings
         # value_json is the JSON contents of the scimsession file
-        # value_json: "{}"
+        # value_json: '{}'
         # value_base64 is the base64 encoded contents of the workspace settings file
         # value_base64: "base64 encoded contents of the workspace settings file"
       workspaceCredentials:
         # key of the secret
         key: workspace-credentials
         # value_json is the JSON contents of the scimsession file
-        # value_json: "{}"
+        # value_json: '{}'
         # value_base64 is the base64 encoded contents of the workspace key file
         # value_base64: "base64 encoded contents of the workspace key file"
   # imageRepository sets the 1Password SCIM bridge image to use

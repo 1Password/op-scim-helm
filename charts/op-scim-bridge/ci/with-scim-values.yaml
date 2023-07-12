@@ -1,15 +1,18 @@
 scim:
-  credentialsVolume: null
-  credentialsSecrets:
-    scimsession:
-      key: scimsession
-      value_json: '{}'
-    workspaceSettings:
-      key: workspace-settings
-      value_json: '{}'
-    workspaceCredentials:
-      key: workspace-credentials
-      value_json: '{}'
+
+  credentials:
+    volume:
+      enabled: false
+    secret:
+      scimsession:
+        key: scimsession
+        value_json: '{}'
+      workspaceSettings:
+        key: workspace-settings
+        value_json: '{}'
+      workspaceCredentials:
+        key: workspace-credentials
+        value_json: '{}'
   service:
     enabled: true
     type: NodePort

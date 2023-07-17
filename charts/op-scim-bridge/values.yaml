@@ -8,7 +8,7 @@ scim:
   credentials:
     volume:
       # setting enabled:true configures the SCIM bridge to access the credentials via a volume
-      enabled: false
+      enabled: true
       # name of an existing volume to use for the credentials
       name: '{{ template "common.names.fullname" . }}-credentials'
       claimName: '{{ template "common.names.fullname" . }}-pvc'
@@ -30,9 +30,9 @@ scim:
       # Set to true if you are using Google Workspace as your identity provider
       googleWorkspace: false
       # setting enabled:true configures the SCIM bridge to access the credentials via a secret
-      enabled: true
+      enabled: false
       # create the secret if it does not exist
-      create: true
+      create: false
       # name of the secret
       name: '{{ template "common.names.fullname" . }}-credentials'
       scimsession:

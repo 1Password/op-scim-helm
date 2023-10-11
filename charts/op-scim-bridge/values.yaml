@@ -195,6 +195,8 @@ redis:
   commonConfiguration: |-
     maxmemory 256mb
     maxmemory-policy volatile-lru
+    # Disable RDB persistence
+    save ""
   master:
     kind: Deployment
     # prefer to schedule redis and SCIM bridge pods on separate nodes

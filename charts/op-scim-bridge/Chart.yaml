@@ -1,6 +1,6 @@
 apiVersion: v2
 name: op-scim-bridge
-version: 2.11.0
+version: 2.11.1
 description: A Helm chart for deploying the 1Password SCIM bridge
 keywords:
   - "1Password"
@@ -17,7 +17,7 @@ maintainers:
   - name: 1Password Provisioning Team
     email: support+scim@1password.com
 icon: https://1password.com/img/logo-v1.svg
-appVersion: v2.9.0
+appVersion: v2.9.1
 dependencies:
   - name: redis
     version: ~18

@@ -330,6 +330,38 @@ entries:
     version: 1.4.3
   op-scim-bridge:
   - apiVersion: v2
+    appVersion: v2.9.1
+    created: "2024-03-21T15:02:10.752320093Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~19
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: ~2
+    description: A Helm chart for deploying the 1Password SCIM bridge
+    digest: 97b129ea27a6e10bf6fb7d360c0495b21aa225a218cc1db5dc3f15762e237587
+    home: https://support.1password.com/scim
+    icon: https://1password.com/img/logo-v1.svg
+    keywords:
+    - 1Password
+    - 1Password SCIM bridge
+    - SCIM
+    - automated provisioning
+    - Azure Active Directory
+    - JumpCloud
+    - Okta
+    - OneLogin
+    - Rippling
+    maintainers:
+    - email: support+scim@1password.com
+      name: 1Password Provisioning Team
+    name: op-scim-bridge
+    urls:
+    - https://github.com/1Password/op-scim-helm/releases/download/op-scim-bridge-2.11.1/op-scim-bridge-2.11.1.tgz
+    version: 2.11.1
+  - apiVersion: v2
     appVersion: v2.9.0
     created: "2024-01-15T19:52:33.176966153Z"
     dependencies:
@@ -902,4 +934,4 @@ entries:
     urls:
     - https://github.com/1Password/op-scim-helm/releases/download/op-scim-bridge-2.5.0/op-scim-bridge-2.5.0.tgz
     version: 2.5.0
-generated: "2024-01-15T19:52:33.177344631Z"
+generated: "2024-03-21T15:02:10.752537753Z"

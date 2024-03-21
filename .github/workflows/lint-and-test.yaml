@@ -34,7 +34,7 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v1
         with:
-          version: v3.4.1
+          version: v3.14.3
 
       # Set up Python for ct lint, which needs Python for Yamale and yamllint
       - name: Set up Python

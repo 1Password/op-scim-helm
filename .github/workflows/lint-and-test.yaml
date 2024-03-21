@@ -80,7 +80,7 @@ jobs:
           done
 
       - name: Spin up local Kubernetes cluster
-        uses: helm/kind-action@v1.2.0
+        uses: helm/kind-action@v1
 
       - name: Deploy and run acceptance tests
         run: ct install --config ct.yaml

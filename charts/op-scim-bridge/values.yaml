@@ -214,7 +214,7 @@ redis:
                       - op-scim-bridge
               topologyKey: "kubernetes.io/hostname"
     persistence:
-      enabled : false
+      enabled: false
     resources:
       requests:
         cpu: 125m

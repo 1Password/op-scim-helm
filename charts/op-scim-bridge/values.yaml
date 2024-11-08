@@ -109,6 +109,11 @@ scim:
   tls:
     enabled: false
     secret: "{{ .Release.Name }}-tls"
+  # Additional environment variables for the SCIM bridge pod
+  # must be a string (multiline) so you have to add a | after extraEnv:
+  extraEnv: ""
+  #   - name: OP_TLS_KEY_FILE
+  #   - name: OP_TLS_CERT_FILE
   # resource sets the requests and/or limits for the SCIM bridge pod
   resources:
     requests:

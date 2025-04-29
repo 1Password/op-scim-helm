@@ -13,7 +13,7 @@ keywords:
   - "OneLogin"
   - "Rippling"
 home: https://support.1password.com/scim
-maintainers: 
+maintainers:  
   - name: 1Password Provisioning Team
     email: support+scim@1password.com
 icon: https://1password.com/img/logo-v1.svg

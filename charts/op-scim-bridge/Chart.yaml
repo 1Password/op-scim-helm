@@ -21,7 +21,7 @@ appVersion: v2.9.13
 dependencies:
   - name: redis
     version: ~23
-    repository:  oci://registry-1.docker.io/bitnamichartssecure
+    repository: oci://registry-1.docker.io/bitnamichartssecure
     condition: redis.enabled
   - name: common
     version: ~2

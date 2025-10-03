@@ -185,7 +185,7 @@ redis:
   architecture: standalone
   image:
     registry: docker.io
-    repository: bitnami/redis
+    repository: bitnamisecure/redis
     tag: latest
     pullPolicy: IfNotPresent
   cluster:

@@ -1,0 +1,45 @@
+{{- if .Values.scim.httproute.enabled -}}
+{{- $name := tpl .Values.scim.name . -}}
+apiVersion: {{ .Values.scim.httproute.apiVersion | default "gateway.networking.k8s.io/v1" }}
+kind: HTTPRoute
+metadata:
+  name: {{ $name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: {{ $name }}
+    {{- with .Values.scim.labels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- with .Values.scim.httproute.labels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.scim.httproute.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .Values.scim.httproute.parentRefs }}
+  parentRefs:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.scim.httproute.hostnames }}
+  hostnames:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+    {{- if .Values.scim.httproute.rules }}
+    {{- toYaml .Values.scim.httproute.rules | nindent 4 }}
+    {{- else }}
+    - matches:
+        - path:
+            type: {{ .Values.scim.httproute.matches.path.type | default "PathPrefix" }}
+            value: {{ .Values.scim.httproute.matches.path.value | default "/" | quote }}
+      {{- with .Values.scim.httproute.filters }}
+      filters:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      backendRefs:
+        - name: {{ printf "%s-svc" $name }}
+          port: {{ .Values.scim.httproute.backendPort | default 80 }}
+    {{- end }}
+{{- end }}

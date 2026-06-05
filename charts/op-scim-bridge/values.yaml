@@ -85,6 +85,38 @@ scim:
       #  - secretName: chart-example-tls
       #    hosts:
       #      - chart-example.local
+  # httproute defines the configuration for a Gateway API HTTPRoute resource,
+  # an alternative to ingress for Gateway API environments
+  httproute:
+    # enabled determines whether to create the HTTPRoute resource
+    enabled: false
+    # apiVersion overrides the HTTPRoute apiVersion (e.g. gateway.networking.k8s.io/v1beta1)
+    apiVersion: gateway.networking.k8s.io/v1
+    # annotations adds additional annotations to the HTTPRoute
+    annotations: {}
+    # labels adds additional labels to the HTTPRoute
+    labels: {}
+    # parentRefs references the Gateway(s) this route attaches to
+    parentRefs:
+      []
+      # - name: example-gateway
+      #   namespace: gateway-system
+      #   sectionName: https
+    # hostnames sets the hostnames that match this route
+    hostnames:
+      []
+      # - scim.example.com
+    # matches sets the default rule's match conditions (ignored when rules is set)
+    matches:
+      path:
+        type: PathPrefix
+        value: /
+    # backendPort sets the Service port the default rule routes to (80 = http, 443 = https)
+    backendPort: 80
+    # filters applies to the default rule (e.g. RequestHeaderModifier). Ignored when rules is set
+    filters: []
+    # rules overrides the generated default rule entirely for advanced routing
+    rules: []
   # probes configures the liveness probe used for the SCIM bridge pod
   probes:
     # liveness contains the liveness probe config

@@ -82,5 +82,10 @@ jobs:
       - name: Spin up local Kubernetes cluster
         uses: helm/kind-action@v1.9.0
 
+      # Gateway API CRDs are not bundled with kind, so install them before
+      # ct install can apply the HTTPRoute rendered by ci/httproute-values.yaml.
+      - name: Install Gateway API CRDs
+        run: kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+
       - name: Deploy and run acceptance tests
         run: ct install --config ct.yaml

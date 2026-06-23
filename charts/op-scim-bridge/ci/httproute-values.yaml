@@ -1,0 +1,37 @@
+# CI fixture exercising the optional Gateway API HTTPRoute path.
+# Mirrors with-scim-values.yaml so the SCIM bridge installs cleanly, then turns
+# the HTTPRoute on so `ct install` validates the rendered resource against the
+# Gateway API CRDs installed into the kind cluster (see lint-and-test.yaml).
+scim:
+
+  credentials:
+    volume:
+      enabled: false
+    secret:
+      scimsession:
+        key: scimsession
+        value_json: '{}'
+      workspaceSettings:
+        key: workspace-settings
+        value_json: '{}'
+      workspaceCredentials:
+        key: workspace-credentials
+        value_json: '{}'
+  service:
+    enabled: true
+    type: NodePort
+  probes:
+    liveness:
+      enabled: false
+  config:
+    redisURL: "redis://{{ .Release.Namespace }}-redis-master:6379"
+  # Enable the HTTPRoute. The parentRef Gateway need not exist for the resource
+  # to be admitted; this fixture only verifies the rendered HTTPRoute applies
+  # against the Gateway API CRDs.
+  httproute:
+    enabled: true
+    parentRefs:
+      - name: op-scim-ci-gateway
+        namespace: gateway-system
+    hostnames:
+      - scim.ci.example.com

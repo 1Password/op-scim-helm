@@ -89,10 +89,6 @@ spec:
             runAsUser: 999
             runAsGroup: 999
             allowPrivilegeEscalation: false
-          {{- with .Values.scim.imagePullSecrets }}
-          imagePullSecrets:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
           {{- with .Values.scim.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -175,3 +171,7 @@ spec:
               mountPath: "/home/opuser/.op"
               readOnly: false
           {{- end }}
+      {{- with .Values.scim.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 12 }}
+      {{- end }}

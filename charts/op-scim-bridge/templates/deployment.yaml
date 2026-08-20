@@ -156,6 +156,10 @@ spec:
             - name: "OP_PRETTY_LOGS"
               value: "{{ .Values.scim.config.prettyLogs }}"
             {{- end }}
+            {{- if .Values.scim.config.confirmationInterval }}
+            - name: "OP_CONFIRMATION_INTERVAL"
+              value: "{{ .Values.scim.config.confirmationInterval }}"
+            {{- end }}
           ports:
             - containerPort: {{ .Values.scim.httpPort }}
             - containerPort: {{ .Values.scim.httpsPort }}

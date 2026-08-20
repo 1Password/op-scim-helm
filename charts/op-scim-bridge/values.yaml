@@ -106,6 +106,9 @@ scim:
     # jsonLogs: false
     # prettyLogs enables colorized log output
     # prettyLogs: false
+    # confirmationInterval sets the interval (in seconds) for the ConfirmationWatcher
+    # to automatically confirm users who have accepted their invite. Default: 300, Minimum: 30
+    # confirmationInterval: 300
   tls:
     enabled: false
     secret: "{{ .Release.Name }}-tls"

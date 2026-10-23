@@ -38,9 +38,9 @@ jobs:
 
       # Set up Python for ct lint, which needs Python for Yamale and yamllint
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: "3.12"
 
       - name: Set up chart test CLI
         uses: helm/chart-testing-action@v2.1.0

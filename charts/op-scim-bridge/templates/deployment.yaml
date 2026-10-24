@@ -156,6 +156,9 @@ spec:
             - name: "OP_PRETTY_LOGS"
               value: "{{ .Values.scim.config.prettyLogs }}"
             {{- end }}
+            {{- with .Values.extraEnv }}
+            {{- tpl . $ | nindent 12 }}
+            {{- end }}
           ports:
             - containerPort: {{ .Values.scim.httpPort }}
             - containerPort: {{ .Values.scim.httpsPort }}
